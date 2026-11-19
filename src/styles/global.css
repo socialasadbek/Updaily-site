@@ -37,7 +37,7 @@ header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:3px s
 .adminlink{display:inline-block;margin:10px 0;color:var(--red);font-weight:700}
 .slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
 .slide{position:relative;flex:0 0 100%;scroll-snap-align:start;background:var(--dark)}
-.slide img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.slide img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
 .slide h2{margin:0;padding:14px 16px 18px;color:#fff;font-size:24px;line-height:1.2;background:var(--dark)}
 .tools{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);max-width:var(--w);margin:0 auto}
 .rates{display:flex;gap:16px;font-size:14px;min-height:42px}
