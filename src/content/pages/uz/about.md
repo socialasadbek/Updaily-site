@@ -1,8 +1,9 @@
 ---
 title: Biz haqimizda
-description: Updaily — O'zbekiston startup va biznes ekotizimi haqida yangiliklar, tahlil va intervyular beradigan mustaqil media loyiha.
+description: Updaily - O'zbekiston startup va biznes ekotizimi haqida yangiliklar, tahlil va intervyular beradigan mustaqil media loyiha.
 ---
-**Updaily** — O'zbekiston startup va biznes ekotizimi haqida yangiliklar, tahlil va intervyular e'lon qiladigan mustaqil media loyiha.
+
+**Updaily** - O'zbekiston startup va biznes ekotizimi haqida yangiliklar, tahlil va intervyular e'lon qiladigan mustaqil media loyiha.
 
 ## Missiyamiz
 
