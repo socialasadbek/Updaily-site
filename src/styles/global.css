@@ -117,7 +117,7 @@ img,video,iframe{max-width:100%;height:auto}
   .wrap,.tools,.cats{padding-left:24px;padding-right:24px}
   .bar{height:64px;padding:0 16px}
   .logo img{height:36px}
-  .slide img{aspect-ratio:21/9}
+  .slide img{aspect-ratio:16/9;object-fit:contain}
   .slide h2{font-size:32px;padding:20px 32px 28px}
   .h2{font-size:28px;margin:28px 0 8px}
   .row{grid-template-columns:220px 1fr;gap:22px;padding:20px 0}
@@ -135,7 +135,7 @@ img,video,iframe{max-width:100%;height:auto}
 /* ===== Juda katta ekran: 1440px dan ===== */
 @media (min-width:1440px){
   :root{--w:1280px}
-  .slide img{aspect-ratio:24/9}
+  
 }
 
 /* ===== Telefon: 599px gacha ===== */
@@ -143,7 +143,7 @@ img,video,iframe{max-width:100%;height:auto}
   .bar{height:52px;padding:0 4px}
   .logo img{height:26px}
   .lg summary{font-size:13px;padding:0 4px}
-  .slide img{aspect-ratio:4/3}
+  .slide img{aspect-ratio:16/10;object-fit:contain}
   .slide h2{font-size:20px;line-height:1.25;padding:12px 14px 16px}
   .tools{padding:10px 12px}
   .cats{padding:8px 12px}
