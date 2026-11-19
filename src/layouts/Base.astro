@@ -64,7 +64,7 @@ const year = new Date().getFullYear();
       <nav>{S.socials.map((s: any) => <a class="m2" href={s.url} target="_blank" rel="noopener"><Icon name={s.type} /> {names[s.type] ?? s.type}</a>)}</nav>
     </div>
     <div class="small">{legal.map((i) => <a href={i.h}>{i.l}</a>)}</div>
-    <a class="adminlink" href="/admin/">⚙ {t(locale, 'admin')}</a>
+    
   </aside>
   <label class="scrim" for="m"></label>
   <header>
