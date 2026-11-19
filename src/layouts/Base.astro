@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import { settings } from '../lib/content';
+import { locales, hreflang, langName, categories, localePath, t, type Locale } from '../i18n/config';
+const { locale, title, description = '', path, alts = {}, image, type = 'website', jsonLd, cat } = Astro.props as {
+  locale: Locale; title: string; description?: string; path: string;
+  alts?: Partial<Record<Locale, string>>; image?: string; type?: string; jsonLd?: object; cat?: string;
+};
+const site = Astro.site!;
+const abs = (p: string) => new URL(p, site).toString();
+const full = title.includes('Updaily') ? title : `${title} | Updaily`;
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'NewsMediaOrganization', name: 'Updaily', url: site.toString(), logo: abs('/logo.png'),
+    sameAs: (settings.socials as any[]).map((s) => s.url) },
+  ...(jsonLd ? [jsonLd] : []),
+];
+const social: Record<string, string> = { telegram: 'TG', website: 'WEB', linkedin: 'in', instagram: 'IG', facebook: 'FB', youtube: 'YT', x: 'X' };
+---
+<!doctype html>
+<html lang={hreflang[locale]}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{full}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={abs(path)} />
+  {locales.filter((l) => alts[l]).map((l) => <link rel="alternate" hreflang={hreflang[l]} href={abs(alts[l]!)} />)}
+  {alts.uz && <link rel="alternate" hreflang="x-default" href={abs(alts.uz)} />}
+  <meta property="og:site_name" content="Updaily" />
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={full} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={abs(path)} />
+  <meta property="og:image" content={image ? abs(image) : abs('/logo.png')} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.png" />
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</head>
+<body>
+  <input type="checkbox" id="m" />
+  <aside class="drawer">
+    <div class="pills">{(settings.channels as any[]).map((c) => <a class="pill" href={c.url} target="_blank" rel="noopener">{c.label}</a>)}</div>
+    <div class="soc">{(settings.socials as any[]).map((s) => <a href={s.url} target="_blank" rel="noopener" aria-label={s.type}>{social[s.type] ?? s.type}</a>)}</div>
+    <div class="langs">{locales.map((l) => <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langName[l]}</a>)}</div>
+    <a class="adminlink" href="/admin/">⚙ {t(locale, 'admin')}</a>
+    <div class="copy">Updaily.uz {new Date().getFullYear()} ©</div>
+  </aside>
+  <label class="scrim" for="m"></label>
+  <header>
+    <div class="bar">
+      <label class="ic" for="m" aria-label="Menu">☰</label>
+      <a href={localePath(locale)} aria-label="Updaily"><img src="/logo.png" alt="Updaily" width="120" height="30" /></a>
+      <a class="ic" href={localePath(locale, '/search')} aria-label={t(locale, 'search')}>⌕</a>
+    </div>
+    <nav class="cats">
+      {categories.map((c) => <a class={c === cat ? 'on' : ''} href={localePath(locale, `/c/${c}`)}>{t(locale, c)}</a>)}
+    </nav>
+  </header>
+  <slot />
+  <footer>© {new Date().getFullYear()} Updaily.uz</footer>
+  <script is:inline>
+    (function(){var n=Date.now();document.querySelectorAll('.ad').forEach(function(a){var s=a.dataset.start,e=a.dataset.end;if((s&&n<Date.parse(s))||(e&&n>Date.parse(e)))a.remove()});
+    var m=document.getElementById('ad-mid'),p=document.querySelectorAll('.prose>p')[1];if(m&&p)p.after(m);})();
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import { t } from '../i18n/config';
+---
+<Base locale="uz" title={t('uz', 'notFound')} description="404" path="/404">
+  <main class="wrap narrow" style="padding:48px 16px;text-align:center">
+    <h1>404</h1>
+    <p>{t('uz', 'notFound')}</p>
+    <p><a class="adminlink" href="/">{t('uz', 'home')}</a> · <a class="adminlink" href="/search">{t('uz', 'search')}</a></p>
+  </main>
+</Base>

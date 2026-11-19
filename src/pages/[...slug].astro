@@ -1,0 +1,144 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Row from '../components/Row.astro';
+import Share from '../components/Share.astro';
+import Ad from '../components/Ad.astro';
+import { locales, defaultLocale, categories, localePath, t, type Locale } from '../i18n/config';
+import { allArticles, byLocale, slugOf, alternates, readMin, fmtDate, articleUrl } from '../lib/content';
+
+export async function getStaticPaths() {
+  const all = await allArticles();
+  const out: any[] = [];
+  for (const l of locales) {
+    const pre = l === defaultLocale ? '' : l;
+    const j = (p: string) => [pre, p].filter(Boolean).join('/') || undefined;
+    out.push({ params: { slug: j('') }, props: { type: 'home', locale: l } });
+    out.push({ params: { slug: j('search') }, props: { type: 'search', locale: l } });
+    for (const c of categories) out.push({ params: { slug: j(`c/${c}`) }, props: { type: 'category', locale: l, category: c } });
+    for (const a of byLocale(all, l)) out.push({ params: { slug: j(`a/${slugOf(a)}`) }, props: { type: 'article', locale: l, id: a.id } });
+  }
+  return out;
+}
+
+const { type, locale, category, id } = Astro.props as { type: string; locale: Locale; category?: string; id?: string };
+const all = await allArticles();
+const mine = byLocale(all, locale);
+const authors = await getCollection('authors');
+const L = (p = '/') => localePath(locale, p);
+const allLocales = (p: string) => Object.fromEntries(locales.map((l) => [l, localePath(l, p)]));
+const site = Astro.site!.toString().replace(/\/$/, '');
+---
+{type === 'home' && (() => {
+  const feat = mine.filter((a) => a.data.featured).slice(0, 5);
+  const slides = feat.length ? feat : mine.slice(0, 5);
+  return (
+    <Base locale={locale} title="Updaily — Startup & Business Media" description={t(locale, 'latest')} path={L()} alts={allLocales('/')}>
+      <div class="slider">
+        {slides.map((a) => (
+          <a class="slide" href={articleUrl(a)}>
+            {a.data.cover && <img src={a.data.cover} alt={a.data.coverAlt ?? a.data.title} width="1280" height="800" />}
+            <h2>{a.data.title}</h2>
+          </a>
+        ))}
+      </div>
+      <div class="tools">
+        <div class="rates" id="rates"></div>
+        <a class="ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
+      </div>
+      <main class="wrap">
+        <Ad slot="home-top" locale={locale} />
+        <h2 class="h2">{t(locale, 'latest')}</h2>
+        {mine.slice(0, 30).map((a, i) => (<><Row a={a} locale={locale} />{i === 4 && <Ad slot="home-middle" locale={locale} />}</>))}
+      </main>
+      <script is:inline>
+        fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
+          var el=document.getElementById('rates');
+          el.innerHTML=d.rates.filter(function(x){return x.ccy!=='RUB'}).map(function(x){
+            return '<div><b>'+x.ccy+'</b>'+x.rate.toLocaleString('ru-RU',{minimumFractionDigits:2})+' <small class="'+(x.diff>=0?'up':'')+'">'+(x.diff>0?'+':'')+x.diff+'</small></div>';
+          }).join('');
+        }).catch(function(){});
+      </script>
+    </Base>
+  );
+})()}
+
+{type === 'category' && (
+  <Base locale={locale} title={t(locale, category!)} description={t(locale, category!)} path={L(`/c/${category}`)} alts={allLocales(`/c/${category}`)} cat={category}>
+    <main class="wrap">
+      <h1 class="h2">{t(locale, category!)}</h1>
+      {mine.filter((a) => a.data.category === category).map((a) => <Row a={a} locale={locale} />)}
+    </main>
+  </Base>
+)}
+
+{type === 'search' && (
+  <Base locale={locale} title={t(locale, 'search')} description={t(locale, 'search')} path={L('/search')} alts={allLocales('/search')}>
+    <main class="wrap">
+      <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+      <div id="search" style="margin-top:16px"></div>
+      <script is:inline src="/pagefind/pagefind-ui.js"></script>
+      <script is:inline>window.addEventListener('DOMContentLoaded',function(){new PagefindUI({element:'#search',showImages:false,showSubResults:false})})</script>
+    </main>
+  </Base>
+)}
+
+{type === 'article' && await (async () => {
+  const a = all.find((x) => x.id === id)!;
+  const { Content } = await render(a);
+  const d = a.data;
+  const author = authors.find((x) => x.id === d.author);
+  const url = `${site}${articleUrl(a)}`;
+  const desc = d.seoDescription ?? d.summary ?? (a.body ?? '').replace(/\s+/g, ' ').slice(0, 160);
+  const related = mine.filter((x) => x.id !== a.id && x.data.category === d.category).slice(0, 4);
+  const ld = {
+    '@context': 'https://schema.org', '@type': 'NewsArticle', headline: d.title, description: desc, inLanguage: locale,
+    datePublished: d.date.toISOString(), dateModified: (d.updated ?? d.date).toISOString(),
+    image: d.cover ? `${site}${d.cover}` : undefined, mainEntityOfPage: url,
+    author: { '@type': author ? 'Person' : 'Organization', name: author?.data.name ?? 'Updaily' },
+    publisher: { '@type': 'Organization', name: 'Updaily', logo: { '@type': 'ImageObject', url: `${site}/logo.png` } },
+  };
+  return (
+    <Base locale={locale} title={d.seoTitle ?? d.title} description={desc} path={articleUrl(a)} alts={alternates(all, a)} image={d.cover} type="article" jsonLd={ld} cat={d.category}>
+      <article class="wrap narrow" data-pagefind-body>
+        <div class="crumbs"><a href={L()}>{t(locale, 'home')}</a> / <a href={L(`/c/${d.category}`)}>{t(locale, d.category)}</a></div>
+        <h1>{d.title}</h1>
+        <div class="info">
+          <span class="cat">{t(locale, d.category)}</span>
+          <time datetime={d.date.toISOString()}>{fmtDate(d.date)}</time>
+          <span>{readMin(a.body)} {t(locale, 'minRead')}</span>
+          {d.updated && <span>{t(locale, 'updated')}: {fmtDate(d.updated)}</span>}
+          {d.sponsored && <span class="badge">{t(locale, 'sponsored')}</span>}
+        </div>
+        {d.cover && <img class="cover" src={d.cover} alt={d.coverAlt ?? d.title} width="1280" height="720" fetchpriority="high" />}
+        <Share url={url} title={d.title} />
+        {(d.summary || d.keyPoints.length > 0) && (
+          <div class="keybox">
+            <b>{t(locale, 'summary')}</b>
+            {d.summary && <div>{d.summary}</div>}
+            {d.keyPoints.length > 0 && <ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul>}
+          </div>
+        )}
+        <div class="prose"><Content /></div>
+        <Ad slot="article-middle" locale={locale} id="ad-mid" />
+        {d.sources.length > 0 && (
+          <>
+            <div class="lbl">{t(locale, 'sources')}</div>
+            <ul class="src">{d.sources.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.title}</a></li>)}</ul>
+          </>
+        )}
+        <hr style="border:0;border-top:1px solid var(--line);margin:20px 0" />
+        <div class="lbl">{t(locale, 'author')}</div>
+        <div class="author">
+          {author?.data.photo && <img src={author.data.photo} alt={author.data.name} width="48" height="48" />}
+          <span>{author?.data.name ?? 'Updaily'}</span>
+        </div>
+        {d.tags.length > 0 && (<><div class="lbl">{t(locale, 'tags')}</div><div class="tags">{d.tags.map((x) => <span>{x}</span>)}</div></>)}
+        <h2 class="h2">{t(locale, 'share')}</h2>
+        <Share url={url} title={d.title} />
+        <Ad slot="article-bottom" locale={locale} />
+        {related.length > 0 && (<><h2 class="h2">{t(locale, 'news')}</h2>{related.map((x) => <Row a={x} locale={locale} />)}</>)}
+      </article>
+    </Base>
+  );
+})()}

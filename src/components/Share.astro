@@ -1,0 +1,10 @@
+---
+const { url, title } = Astro.props as { url: string; title: string };
+const u = encodeURIComponent(url), x = encodeURIComponent(title);
+---
+<div class="share">
+  <a style="background:#1877f2" href={`https://www.facebook.com/sharer/sharer.php?u=${u}`} target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+  <a style="background:#0f1419" href={`https://twitter.com/intent/tweet?url=${u}&text=${x}`} target="_blank" rel="noopener" aria-label="X">X</a>
+  <a style="background:#229ed9" href={`https://t.me/share/url?url=${u}&text=${x}`} target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
+  <button style="background:#6b7280" type="button" onclick="navigator.clipboard.writeText(location.href);this.textContent='✓'" aria-label="Copy link">Link</button>
+</div>

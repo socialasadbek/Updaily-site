@@ -1,0 +1,12 @@
+---
+import { settings } from '../lib/content';
+import { t, type Locale } from '../i18n/config';
+const { slot, locale, id } = Astro.props as { slot: string; locale: Locale; id?: string };
+const ads = (settings.ads as any[]).filter((a) => a.slot === slot && a.active !== false);
+---
+{ads.map((a, i) => (
+  <a class="ad" id={i === 0 ? id : undefined} href={a.url} target="_blank" rel="sponsored noopener" data-start={a.start} data-end={a.end}>
+    <span>{t(locale, 'ad')}</span>
+    <img src={a.image} alt="" loading="lazy" width="1200" height="400" />
+  </a>
+))}

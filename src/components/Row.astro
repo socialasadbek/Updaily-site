@@ -1,0 +1,12 @@
+---
+import { articleUrl, fmtDate, type Article } from '../lib/content';
+import { t, type Locale } from '../i18n/config';
+const { a, locale } = Astro.props as { a: Article; locale: Locale };
+---
+<a class="row" href={articleUrl(a)}>
+  {a.data.cover ? <img class="th" src={a.data.cover} alt={a.data.coverAlt ?? a.data.title} loading="lazy" width="128" height="72" /> : <div class="th"></div>}
+  <div>
+    <h3>{a.data.title}</h3>
+    <div class="meta"><span class="cat">{t(locale, a.data.category)}</span><span>{fmtDate(a.data.date)}</span></div>
+  </div>
+</a>

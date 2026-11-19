@@ -1,0 +1,18 @@
+{
+  "channels": [
+    { "label": "Updaily (O'zbek)", "url": "https://t.me/Updaily_uz" },
+    { "label": "Updaily (Ўзбек)", "url": "https://t.me/updailyuz" },
+    { "label": "Updaily (RU)", "url": "https://t.me/UpDailyru" },
+    { "label": "Updaily (EN)", "url": "https://t.me/UpDailyglobal" },
+    { "label": "Updaily News", "url": "https://t.me/updailynews" },
+    { "label": "Updaily Media", "url": "https://t.me/updailymedia" },
+    { "label": "Support", "url": "https://t.me/updailysupport" }
+  ],
+  "socials": [
+    { "type": "telegram", "url": "https://t.me/Updaily_uz" },
+    { "type": "website", "url": "https://updaily.uz" },
+    { "type": "youtube", "url": "https://youtube.com/@updaily_uz" },
+    { "type": "x", "url": "https://x.com/updailyuz" }
+  ],
+  "ads": []
+}
