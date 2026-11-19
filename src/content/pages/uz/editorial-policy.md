@@ -1,6 +1,6 @@
 ---
-title: Tahririy siyosat
-description: Updaily tahririyati qanday ishlaydi: manbalar, tuzatishlar, reklama va homiylik materiallari.
+title: "Maxfiylik siyosati"
+description: "Tahririy siyosat haqida ma'lumot"
 ---
 ## Asosiy tamoyillar
 
