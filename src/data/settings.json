@@ -80,30 +80,6 @@
       "start": "2026-11-19T19:23:00Z",
       "end": "",
       "active": true
-    },
-    {
-      "slot": "home-middle",
-      "image": "/uploads/39315.jpg",
-      "url": "https://t.me/Focusprintt",
-      "start": "2026-11-19T19:23:00Z",
-      "end": "",
-      "active": true
-    },
-    {
-      "slot": "article-middle",
-      "image": "/uploads/39315.jpg",
-      "url": "https://t.me/Focusprintt",
-      "start": "2026-11-19T19:23:00Z",
-      "end": "2026-11-19T19:23:00Z",
-      "active": true
-    },
-    {
-      "slot": "article-bottom",
-      "image": "/uploads/39315.jpg",
-      "url": "https://t.me/Focusprintt",
-      "start": "2026-11-19T19:23:00Z",
-      "end": "",
-      "active": true
     }
   ]
 }
