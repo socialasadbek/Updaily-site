@@ -1,8 +1,8 @@
 ---
 translationKey: Ish xaqi kartalar
 title: O‘zbekistonliklar ish haqini istalgan bank kartasiga olishlari mumkin
-date: 2026-11-19T09:23:00
-updated: 2026-11-19T08:57:00
+date: 2026-11-19T09:26:00
+updated: 2026-11-19T09:26:00
 author: botirov-asadbek
 category: business
 cover: /uploads/39312.png
