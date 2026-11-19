@@ -93,3 +93,79 @@ footer p{margin:8px 0}
 .soc a{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center}
 .flinks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:16px 0;color:#fff;font-weight:600}
 .ul{text-decoration:underline}
+/* ===== Umumiy himoya ===== */
+html{-webkit-text-size-adjust:100%}
+img,video,iframe{max-width:100%;height:auto}
+.prose{overflow-wrap:break-word}
+.prose table,table{display:block;overflow-x:auto}
+
+/* ===== Planshet: 600px - 1023px ===== */
+@media (min-width:600px) and (max-width:1023px){
+  .wrap,.tools,.cats{padding-left:20px;padding-right:20px}
+  .slide h2{font-size:26px;padding:16px 20px 20px}
+  .row{grid-template-columns:168px 1fr;gap:16px}
+  .row .th{width:168px}
+  .row h3{font-size:18px}
+  article h1{font-size:32px}
+  .drawer{width:min(60vw,380px)}
+}
+
+/* ===== Laptop va katta ekran: 1024px dan ===== */
+@media (min-width:1024px){
+  :root{--w:1160px}
+  body{font-size:17px}
+  .wrap,.tools,.cats{padding-left:24px;padding-right:24px}
+  .bar{height:64px;padding:0 16px}
+  .logo img{height:36px}
+  .slide img{aspect-ratio:21/9}
+  .slide h2{font-size:32px;padding:20px 32px 28px}
+  .h2{font-size:28px;margin:28px 0 8px}
+  .row{grid-template-columns:220px 1fr;gap:22px;padding:20px 0}
+  .row .th{width:220px}
+  .row h3{font-size:20px}
+  .meta{font-size:14px}
+  article h1{font-size:40px}
+  .prose{font-size:19px}
+  .cover{aspect-ratio:21/9}
+  .ad img{aspect-ratio:4/1}
+  .drawer{width:min(40vw,420px)}
+  footer{padding:32px 24px}
+}
+
+/* ===== Juda katta ekran: 1440px dan ===== */
+@media (min-width:1440px){
+  :root{--w:1280px}
+  .slide img{aspect-ratio:24/9}
+}
+
+/* ===== Telefon: 599px gacha ===== */
+@media (max-width:599px){
+  .bar{height:52px;padding:0 4px}
+  .logo img{height:26px}
+  .lg summary{font-size:13px;padding:0 4px}
+  .slide img{aspect-ratio:4/3}
+  .slide h2{font-size:20px;line-height:1.25;padding:12px 14px 16px}
+  .tools{padding:10px 12px}
+  .cats{padding:8px 12px}
+  .wrap{padding:0 12px}
+  .h2{font-size:21px;margin:18px 0 4px}
+  .row{grid-template-columns:100px 1fr;gap:10px;padding:12px 0}
+  .row .th{width:100px}
+  .row h3{font-size:15px}
+  .meta{font-size:12px}
+  .bd{flex-basis:48px;height:48px}
+  .ev{gap:10px}
+  article h1{font-size:23px}
+  .info{font-size:13px}
+  .prose{font-size:17px;line-height:1.65}
+  .cover{aspect-ratio:4/3}
+  .author{font-size:16px}
+  .ad img{aspect-ratio:16/9}
+  .share a,.share button{font-size:13px;height:40px}
+  .drawer{width:88vw;padding:16px 16px 28px}
+  .menu{grid-template-columns:1fr}
+  .menu a{font-size:16px}
+  .flinks{font-size:14px;gap:6px 12px}
+  footer{padding:20px 12px}
+  .soc a{width:40px;height:40px}
+}
