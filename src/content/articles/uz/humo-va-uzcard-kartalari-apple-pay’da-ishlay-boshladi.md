@@ -2,7 +2,7 @@
 translationKey: Apple pay 2026, uzcard and humocard
 title: HUMO va UZCARD kartalari Apple Pay’da ishlay boshladi
 date: 2026-11-19T19:34:00Z
-updated: ''
+updated: 2026-11-19T19:53:00Z
 author: asadbek-botirov
 category: news
 cover: /uploads/39728.jpg
@@ -18,7 +18,7 @@ tags:
   - Uzcard
   - Applepay
 sources: []
-featured: false
+featured: true
 sponsored: false
 published: true
 seoTitle: ''
