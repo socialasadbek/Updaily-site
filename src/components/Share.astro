@@ -1,10 +1,17 @@
 ---
-const { url, title } = Astro.props as { url: string; title: string };
-const u = encodeURIComponent(url), x = encodeURIComponent(title);
+import { settings } from '../lib/content';
+import { t, type Locale } from '../i18n/config';
+const { url, title, locale } = Astro.props as { url: string; title: string; locale: Locale };
+const pick = (type: string) => (settings.socials as any[]).find((s) => s.type === type)?.url;
+const tg = (settings.channels as any[]).find((c) => c.lang === locale)?.url ?? pick('telegram');
+const links = [
+  { name: 'Facebook', url: pick('facebook'), bg: '#1877f2' },
+  { name: 'LinkedIn', url: pick('linkedin'), bg: '#0a66c2' },
+  { name: 'Telegram', url: tg, bg: '#229ed9' },
+].filter((l) => l.url);
+const act = "(function(b){var d={title:b.dataset.title,url:b.dataset.url};if(navigator.share){navigator.share(d).catch(function(){})}else{navigator.clipboard.writeText(d.url);b.textContent='\u2713'}})(this)";
 ---
 <div class="share">
-  <a style="background:#1877f2" href={`https://www.facebook.com/sharer/sharer.php?u=${u}`} target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
-  <a style="background:#0f1419" href={`https://twitter.com/intent/tweet?url=${u}&text=${x}`} target="_blank" rel="noopener" aria-label="X">X</a>
-  <a style="background:#229ed9" href={`https://t.me/share/url?url=${u}&text=${x}`} target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
-  <button style="background:#6b7280" type="button" onclick="navigator.clipboard.writeText(location.href);this.textContent='✓'" aria-label="Copy link">Link</button>
+  {links.map((l) => <a style={`background:${l.bg}`} href={l.url} target="_blank" rel="noopener">{l.name}</a>)}
+  <button style="background:#6b7280" type="button" data-url={url} data-title={title} onclick={act}>{t(locale, 'shareBtn')}</button>
 </div>

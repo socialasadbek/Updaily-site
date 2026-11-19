@@ -1,18 +1,27 @@
 {
   "channels": [
-    { "label": "Updaily (O'zbek)", "url": "https://t.me/Updaily_uz" },
-    { "label": "Updaily (Ўзбек)", "url": "https://t.me/updailyuz" },
-    { "label": "Updaily (RU)", "url": "https://t.me/UpDailyru" },
-    { "label": "Updaily (EN)", "url": "https://t.me/UpDailyglobal" },
+    { "label": "Updaily (O'zbek)", "url": "https://t.me/Updaily_uz", "lang": "uz" },
+    { "label": "Updaily (Ўзбек)", "url": "https://t.me/updailyuz", "lang": "cyrl" },
+    { "label": "Updaily (RU)", "url": "https://t.me/UpDailyru", "lang": "ru" },
+    { "label": "Updaily (EN)", "url": "https://t.me/UpDailyglobal", "lang": "en" },
     { "label": "Updaily News", "url": "https://t.me/updailynews" },
     { "label": "Updaily Media", "url": "https://t.me/updailymedia" },
     { "label": "Support", "url": "https://t.me/updailysupport" }
   ],
   "socials": [
     { "type": "telegram", "url": "https://t.me/Updaily_uz" },
-    { "type": "website", "url": "https://updaily.uz" },
+    { "type": "facebook", "url": "https://www.facebook.com/share/1Pq9U3ZXfs/" },
+    { "type": "instagram", "url": "https://www.instagram.com/updaily_uz" },
     { "type": "youtube", "url": "https://youtube.com/@updaily_uz" },
+    { "type": "linkedin", "url": "https://www.linkedin.com/company/updaily/" },
     { "type": "x", "url": "https://x.com/updailyuz" }
   ],
+  "contact": {
+    "email": "Updaily.uz@gmail.com",
+    "telegram": "https://t.me/updailysupport",
+    "phones": ["+998 93 640 65 65", "+998 33 640 65 65"],
+    "editorName": "Asadbek Botirov",
+    "editorLinkedin": "https://www.linkedin.com/in/asadbekbotirov"
+  },
   "ads": []
 }

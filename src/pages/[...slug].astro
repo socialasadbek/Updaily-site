@@ -4,34 +4,56 @@ import Base from '../layouts/Base.astro';
 import Row from '../components/Row.astro';
 import Share from '../components/Share.astro';
 import Ad from '../components/Ad.astro';
+import EventItem from '../components/EventItem.astro';
 import { locales, defaultLocale, categories, localePath, t, type Locale } from '../i18n/config';
-import { allArticles, byLocale, slugOf, alternates, readMin, fmtDate, articleUrl } from '../lib/content';
+import { allArticles, byLocale, slugOf, alternates, readMin, fmtDate, articleUrl, eventsFor, getPage, PAGE_SLUGS, settings } from '../lib/content';
 
 export async function getStaticPaths() {
   const all = await allArticles();
+  const authors = await getCollection('authors');
   const out: any[] = [];
   for (const l of locales) {
     const pre = l === defaultLocale ? '' : l;
     const j = (p: string) => [pre, p].filter(Boolean).join('/') || undefined;
     out.push({ params: { slug: j('') }, props: { type: 'home', locale: l } });
     out.push({ params: { slug: j('search') }, props: { type: 'search', locale: l } });
+    out.push({ params: { slug: j('events') }, props: { type: 'events', locale: l } });
+    out.push({ params: { slug: j('rates') }, props: { type: 'rates', locale: l } });
     for (const c of categories) out.push({ params: { slug: j(`c/${c}`) }, props: { type: 'category', locale: l, category: c } });
+    for (const p of PAGE_SLUGS) out.push({ params: { slug: j(p) }, props: { type: 'page', locale: l, page: p } });
+    for (const a of authors) out.push({ params: { slug: j(`author/${a.id}`) }, props: { type: 'author', locale: l, authorId: a.id } });
     for (const a of byLocale(all, l)) out.push({ params: { slug: j(`a/${slugOf(a)}`) }, props: { type: 'article', locale: l, id: a.id } });
   }
   return out;
 }
 
-const { type, locale, category, id } = Astro.props as { type: string; locale: Locale; category?: string; id?: string };
+const { type, locale, category, id, page, authorId } = Astro.props as {
+  type: string; locale: Locale; category?: string; id?: string; page?: string; authorId?: string;
+};
 const all = await allArticles();
 const mine = byLocale(all, locale);
 const authors = await getCollection('authors');
 const L = (p = '/') => localePath(locale, p);
 const allLocales = (p: string) => Object.fromEntries(locales.map((l) => [l, localePath(l, p)]));
 const site = Astro.site!.toString().replace(/\/$/, '');
+const contact = (settings as any).contact;
+const ratesScript = `
+fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
+  var f=function(n){return n.toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2})};
+  var h=document.getElementById('rates');
+  if(h)h.innerHTML=d.rates.filter(function(x){return x.ccy==='USD'||x.ccy==='EUR'}).map(function(x){
+    return '<div><b>'+x.ccy+'</b>'+f(x.rate)+' <small class="'+(x.diff>=0?'up':'')+'">'+(x.diff>0?'+':'')+x.diff+'</small></div>'}).join('');
+  var t=document.getElementById('rt');
+  if(t){t.innerHTML=d.rates.map(function(x){
+    return '<tr><td><b>'+x.ccy+'</b></td><td>'+f(x.rate)+'</td><td class="'+(x.diff>=0?'up':'dn')+'">'+(x.diff>0?'+':'')+x.diff+'</td></tr>'}).join('');
+    var dd=document.getElementById('rd');if(dd&&d.rates[0])dd.textContent=d.rates[0].date}
+}).catch(function(){});
+`;
 ---
-{type === 'home' && (() => {
+{type === 'home' && await (async () => {
   const feat = mine.filter((a) => a.data.featured).slice(0, 5);
   const slides = feat.length ? feat : mine.slice(0, 5);
+  const { up } = await eventsFor(locale);
   return (
     <Base locale={locale} title="Updaily — Startup & Business Media" description={t(locale, 'latest')} path={L()} alts={allLocales('/')}>
       <div class="slider">
@@ -43,21 +65,32 @@ const site = Astro.site!.toString().replace(/\/$/, '');
         ))}
       </div>
       <div class="tools">
-        <div class="rates" id="rates"></div>
+        <a class="rates" id="rates" href={L('/rates')} aria-label={t(locale, 'rates')}></a>
         <a class="ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
       </div>
       <main class="wrap">
         <Ad slot="home-top" locale={locale} />
         <h2 class="h2">{t(locale, 'latest')}</h2>
-        {mine.slice(0, 30).map((a, i) => (<><Row a={a} locale={locale} />{i === 4 && <Ad slot="home-middle" locale={locale} />}</>))}
+        {mine.slice(0, 45).map((a, i) => (
+          <>
+            <div data-more hidden={i >= 15}><Row a={a} locale={locale} /></div>
+            {i === 4 && <Ad slot="home-middle" locale={locale} />}
+          </>
+        ))}
+        {mine.length > 15 && <button class="more" id="more" type="button">{t(locale, 'more')}</button>}
+        {up.length > 0 && (
+          <section>
+            <h2 class="h2">{t(locale, 'events')}</h2>
+            {up.slice(0, 5).map((e) => <EventItem e={e} locale={locale} />)}
+            <a class="alllink" href={L('/events')}>{t(locale, 'calendar')} →</a>
+          </section>
+        )}
       </main>
+      <script is:inline set:html={ratesScript}></script>
       <script is:inline>
-        fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
-          var el=document.getElementById('rates');
-          el.innerHTML=d.rates.filter(function(x){return x.ccy!=='RUB'}).map(function(x){
-            return '<div><b>'+x.ccy+'</b>'+x.rate.toLocaleString('ru-RU',{minimumFractionDigits:2})+' <small class="'+(x.diff>=0?'up':'')+'">'+(x.diff>0?'+':'')+x.diff+'</small></div>';
-          }).join('');
-        }).catch(function(){});
+        (function(){var b=document.getElementById('more');if(!b)return;b.addEventListener('click',function(){
+          var h=document.querySelectorAll('[data-more][hidden]');for(var i=0;i<15&&i<h.length;i++)h[i].hidden=false;
+          if(!document.querySelector('[data-more][hidden]'))b.remove()})})();
       </script>
     </Base>
   );
@@ -83,6 +116,81 @@ const site = Astro.site!.toString().replace(/\/$/, '');
   </Base>
 )}
 
+{type === 'rates' && (
+  <Base locale={locale} title={t(locale, 'rates')} description={t(locale, 'rateNote')} path={L('/rates')} alts={allLocales('/rates')}>
+    <main class="wrap narrow">
+      <h1 class="h2">{t(locale, 'rates')}</h1>
+      <div class="ep">{t(locale, 'rateNote')} · <span id="rd"></span></div>
+      <table><tbody id="rt"></tbody></table>
+    </main>
+    <script is:inline set:html={ratesScript}></script>
+  </Base>
+)}
+
+{type === 'events' && await (async () => {
+  const { up, past } = await eventsFor(locale);
+  return (
+    <Base locale={locale} title={t(locale, 'calendar')} description={t(locale, 'calendar')} path={L('/events')} alts={allLocales('/events')}>
+      <main class="wrap narrow">
+        <h1 class="h2">{t(locale, 'upcoming')}</h1>
+        {up.map((e) => <EventItem e={e} locale={locale} />)}
+        {past.length > 0 && (<><h2 class="h2">{t(locale, 'past')}</h2>{past.map((e) => <EventItem e={e} locale={locale} />)}</>)}
+      </main>
+    </Base>
+  );
+})()}
+
+{type === 'page' && await (async () => {
+  const entry = (await getPage(page!, locale))!;
+  const { Content } = await render(entry);
+  const team = page === 'about' ? authors.filter((a) => a.data.team) : [];
+  return (
+    <Base locale={locale} title={entry.data.title} description={entry.data.description ?? ''} path={L(`/${page}`)} alts={allLocales(`/${page}`)}
+      jsonLd={page === 'about' ? { '@context': 'https://schema.org', '@type': 'AboutPage', name: entry.data.title, url: `${site}${L('/about')}` } : undefined}>
+      <main class="wrap narrow">
+        <h1 class="h2">{entry.data.title}</h1>
+        <div class="prose"><Content /></div>
+        {team.length > 0 && (
+          <>
+            <h2 class="h2">{t(locale, 'team')}</h2>
+            <div class="team">
+              {team.map((a) => (
+                <a class="card" href={L(`/author/${a.id}`)}><b>{a.data.name}</b><div class="ep">{a.data.role}</div></a>
+              ))}
+            </div>
+          </>
+        )}
+      </main>
+    </Base>
+  );
+})()}
+
+{type === 'author' && (() => {
+  const au = authors.find((x) => x.id === authorId)!;
+  const list = mine.filter((a) => a.data.author === au.id);
+  const same = [au.data.linkedin, au.data.telegram].filter(Boolean);
+  const ld = {
+    '@context': 'https://schema.org', '@type': 'Person', name: au.data.name, url: `${site}${L(`/author/${au.id}`)}`,
+    jobTitle: au.data.role, worksFor: { '@type': 'Organization', name: 'Updaily', url: site },
+    sameAs: same, knowsAbout: au.data.expertise, image: au.data.photo ? `${site}${au.data.photo}` : undefined,
+  };
+  return (
+    <Base locale={locale} title={`${au.data.name}${au.data.role ? ' — ' + au.data.role : ''}`} description={au.data.bio ?? au.data.name}
+      path={L(`/author/${au.id}`)} alts={allLocales(`/author/${au.id}`)} jsonLd={ld}>
+      <main class="wrap narrow">
+        <div class="author" style="margin-top:20px">
+          {au.data.photo && <img src={au.data.photo} alt={au.data.name} width="48" height="48" />}
+          <div><h1 style="margin:0;font-size:26px">{au.data.name}</h1>{au.data.role && <small>{au.data.role}</small>}</div>
+        </div>
+        {au.data.bio && <p class="prose">{au.data.bio}</p>}
+        {au.data.expertise.length > 0 && (<><div class="lbl">{t(locale, 'expertise')}</div><div class="tags">{au.data.expertise.map((x) => <span>{x}</span>)}</div></>)}
+        {same.length > 0 && <p>{same.map((u) => <a class="ul" href={u as string} target="_blank" rel="noopener me">{(u as string).includes('linkedin') ? 'LinkedIn' : 'Telegram'}</a>).reduce((a: any, b: any) => [a, ' · ', b] as any)}</p>}
+        {list.length > 0 && (<><h2 class="h2">{t(locale, 'articlesBy')}</h2>{list.map((a) => <Row a={a} locale={locale} />)}</>)}
+      </main>
+    </Base>
+  );
+})()}
+
 {type === 'article' && await (async () => {
   const a = all.find((x) => x.id === id)!;
   const { Content } = await render(a);
@@ -95,9 +203,12 @@ const site = Astro.site!.toString().replace(/\/$/, '');
     '@context': 'https://schema.org', '@type': 'NewsArticle', headline: d.title, description: desc, inLanguage: locale,
     datePublished: d.date.toISOString(), dateModified: (d.updated ?? d.date).toISOString(),
     image: d.cover ? `${site}${d.cover}` : undefined, mainEntityOfPage: url,
-    author: { '@type': author ? 'Person' : 'Organization', name: author?.data.name ?? 'Updaily' },
+    author: author
+      ? { '@type': 'Person', name: author.data.name, url: `${site}${L(`/author/${author.id}`)}` }
+      : { '@type': 'Organization', name: 'Updaily' },
     publisher: { '@type': 'Organization', name: 'Updaily', logo: { '@type': 'ImageObject', url: `${site}/logo.png` } },
   };
+  const mail = `mailto:${contact.email}?subject=${encodeURIComponent('Xato: ' + d.title)}&body=${encodeURIComponent(url)}`;
   return (
     <Base locale={locale} title={d.seoTitle ?? d.title} description={desc} path={articleUrl(a)} alts={alternates(all, a)} image={d.cover} type="article" jsonLd={ld} cat={d.category}>
       <article class="wrap narrow" data-pagefind-body>
@@ -111,7 +222,7 @@ const site = Astro.site!.toString().replace(/\/$/, '');
           {d.sponsored && <span class="badge">{t(locale, 'sponsored')}</span>}
         </div>
         {d.cover && <img class="cover" src={d.cover} alt={d.coverAlt ?? d.title} width="1280" height="720" fetchpriority="high" />}
-        <Share url={url} title={d.title} />
+        <Share url={url} title={d.title} locale={locale} />
         {(d.summary || d.keyPoints.length > 0) && (
           <div class="keybox">
             <b>{t(locale, 'summary')}</b>
@@ -127,17 +238,20 @@ const site = Astro.site!.toString().replace(/\/$/, '');
             <ul class="src">{d.sources.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.title}</a></li>)}</ul>
           </>
         )}
-        <hr style="border:0;border-top:1px solid var(--line);margin:20px 0" />
+        <hr />
         <div class="lbl">{t(locale, 'author')}</div>
-        <div class="author">
-          {author?.data.photo && <img src={author.data.photo} alt={author.data.name} width="48" height="48" />}
-          <span>{author?.data.name ?? 'Updaily'}</span>
-        </div>
+        {author ? (
+          <a class="author" href={L(`/author/${author.id}`)}>
+            {author.data.photo && <img src={author.data.photo} alt={author.data.name} width="48" height="48" />}
+            <span>{author.data.name}{author.data.role && <small>{author.data.role}</small>}</span>
+          </a>
+        ) : <div class="author"><span>Updaily</span></div>}
+        <a class="rep" href={mail}>{t(locale, 'report')}</a>
         {d.tags.length > 0 && (<><div class="lbl">{t(locale, 'tags')}</div><div class="tags">{d.tags.map((x) => <span>{x}</span>)}</div></>)}
-        <h2 class="h2">{t(locale, 'share')}</h2>
-        <Share url={url} title={d.title} />
+        <h2 class="h2">{t(locale, 'follow')}</h2>
+        <Share url={url} title={d.title} locale={locale} />
         <Ad slot="article-bottom" locale={locale} />
-        {related.length > 0 && (<><h2 class="h2">{t(locale, 'news')}</h2>{related.map((x) => <Row a={x} locale={locale} />)}</>)}
+        {related.length > 0 && (<><h2 class="h2">{t(locale, d.category)}</h2>{related.map((x) => <Row a={x} locale={locale} />)}</>)}
       </article>
     </Base>
   );

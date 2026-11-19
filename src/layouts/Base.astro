@@ -1,7 +1,8 @@
 ---
 import '../styles/global.css';
+import Icon from '../components/Icon.astro';
 import { settings } from '../lib/content';
-import { locales, hreflang, langName, categories, localePath, t, type Locale } from '../i18n/config';
+import { locales, hreflang, langName, langCode, categories, localePath, t, type Locale } from '../i18n/config';
 const { locale, title, description = '', path, alts = {}, image, type = 'website', jsonLd, cat } = Astro.props as {
   locale: Locale; title: string; description?: string; path: string;
   alts?: Partial<Record<Locale, string>>; image?: string; type?: string; jsonLd?: object; cat?: string;
@@ -9,18 +10,31 @@ const { locale, title, description = '', path, alts = {}, image, type = 'website
 const site = Astro.site!;
 const abs = (p: string) => new URL(p, site).toString();
 const full = title.includes('Updaily') ? title : `${title} | Updaily`;
+const S = settings as any;
+const c = S.contact;
+const L = (p = '/') => localePath(locale, p);
 const ld = [
   { '@context': 'https://schema.org', '@type': 'NewsMediaOrganization', name: 'Updaily', url: site.toString(), logo: abs('/logo.png'),
-    sameAs: (settings.socials as any[]).map((s) => s.url) },
+    sameAs: S.socials.map((s: any) => s.url),
+    contactPoint: { '@type': 'ContactPoint', email: c.email, contactType: 'customer support' } },
   ...(jsonLd ? [jsonLd] : []),
 ];
-const social: Record<string, string> = { telegram: 'TG', website: 'WEB', linkedin: 'in', instagram: 'IG', facebook: 'FB', youtube: 'YT', x: 'X' };
+const names: Record<string, string> = { telegram: 'Telegram', facebook: 'Facebook', instagram: 'Instagram', youtube: 'YouTube', linkedin: 'LinkedIn', x: 'X' };
+const left = [{ l: t(locale, 'news'), h: L('/c/news') }, { l: t(locale, 'articles'), h: L('/c/articles') }, { l: t(locale, 'rates'), h: L('/rates') }];
+const right = ['startups', 'business', 'investments', 'technology', 'research', 'interviews'].map((k) => ({ l: t(locale, k), h: L(`/c/${k}`) }))
+  .concat([{ l: t(locale, 'events'), h: L('/events') }]);
+const info = [{ l: t(locale, 'advertising'), h: L('/advertising') }, { l: t(locale, 'contact'), h: L('/contact') }, { l: t(locale, 'about'), h: L('/about') }];
+const legal = [{ l: t(locale, 'policy'), h: L('/editorial-policy') }, { l: t(locale, 'privacy'), h: L('/privacy') }, { l: t(locale, 'terms'), h: L('/terms') }];
+const year = new Date().getFullYear();
 ---
 <!doctype html>
 <html lang={hreflang[locale]}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script is:inline>
+    (function(){try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})();
+  </script>
   <title>{full}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={abs(path)} />
@@ -39,28 +53,59 @@ const social: Record<string, string> = { telegram: 'TG', website: 'WEB', linkedi
 <body>
   <input type="checkbox" id="m" />
   <aside class="drawer">
-    <div class="pills">{(settings.channels as any[]).map((c) => <a class="pill" href={c.url} target="_blank" rel="noopener">{c.label}</a>)}</div>
-    <div class="soc">{(settings.socials as any[]).map((s) => <a href={s.url} target="_blank" rel="noopener" aria-label={s.type}>{social[s.type] ?? s.type}</a>)}</div>
-    <div class="langs">{locales.map((l) => <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langName[l]}</a>)}</div>
+    <div class="menu">
+      <nav>{left.map((i) => <a class="m1" href={i.h}>{i.l}</a>)}</nav>
+      <nav>{right.map((i) => <a class="m2" href={i.h}>{i.l}</a>)}</nav>
+    </div>
+    <hr />
+    <div class="til">{t(locale, 'lang')}: {locales.map((l) => <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langCode[l]}</a>)}</div>
+    <div class="menu">
+      <nav>{info.map((i) => <a class="m2" href={i.h}>{i.l}</a>)}</nav>
+      <nav>{S.socials.map((s: any) => <a class="m2" href={s.url} target="_blank" rel="noopener"><Icon name={s.type} /> {names[s.type] ?? s.type}</a>)}</nav>
+    </div>
+    <div class="small">{legal.map((i) => <a href={i.h}>{i.l}</a>)}</div>
     <a class="adminlink" href="/admin/">⚙ {t(locale, 'admin')}</a>
-    <div class="copy">Updaily.uz {new Date().getFullYear()} ©</div>
   </aside>
   <label class="scrim" for="m"></label>
   <header>
     <div class="bar">
-      <label class="ic" for="m" aria-label="Menu">☰</label>
-      <a href={localePath(locale)} aria-label="Updaily"><img src="/logo.png" alt="Updaily" width="120" height="30" /></a>
-      <a class="ic" href={localePath(locale, '/search')} aria-label={t(locale, 'search')}>⌕</a>
+      <div class="g">
+        <label class="ic" for="m" aria-label="Menu">☰</label>
+        <details class="lg">
+          <summary aria-label={t(locale, 'lang')}><Icon name="globe" /> {langCode[locale]}</summary>
+          <div class="lgm">{locales.map((l) => <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langName[l]}</a>)}</div>
+        </details>
+      </div>
+      <a class="logo" href={L()} aria-label="Updaily"><img src="/logo.png" alt="Updaily" width="120" height="30" /></a>
+      <div class="g r">
+        <a class="ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
+        <button class="ic" id="th" type="button" aria-label={t(locale, 'theme')}>◐</button>
+      </div>
     </div>
     <nav class="cats">
-      {categories.map((c) => <a class={c === cat ? 'on' : ''} href={localePath(locale, `/c/${c}`)}>{t(locale, c)}</a>)}
+      {categories.map((k) => <a class={k === cat ? 'on' : ''} href={L(`/c/${k}`)}>{t(locale, k)}</a>)}
     </nav>
   </header>
   <slot />
-  <footer>© {new Date().getFullYear()} Updaily.uz</footer>
+  <footer>
+    <div class="soc">{S.socials.map((s: any) => <a href={s.url} target="_blank" rel="noopener" aria-label={names[s.type] ?? s.type}><Icon name={s.type} /></a>)}</div>
+    <nav class="flinks">{info.concat(legal).map((i) => <a href={i.h}>{i.l}</a>)}</nav>
+    <p>© {year} Updaily.uz</p>
+    <p>{t(locale, 'editorIn')}: <a class="ul" href={c.editorLinkedin} target="_blank" rel="noopener">{c.editorName}</a></p>
+    <p>
+      <a class="ul" href={`mailto:${c.email}`}>{c.email}</a> ·
+      <a class="ul" href={c.telegram} target="_blank" rel="noopener">Telegram</a>
+    </p>
+    <p>{c.phones.map((p: string, i: number) => <><a class="ul" href={`tel:${p.replace(/[^\d+]/g, '')}`}>{p}</a>{i < c.phones.length - 1 && ' · '}</>)}</p>
+  </footer>
   <script is:inline>
-    (function(){var n=Date.now();document.querySelectorAll('.ad').forEach(function(a){var s=a.dataset.start,e=a.dataset.end;if((s&&n<Date.parse(s))||(e&&n>Date.parse(e)))a.remove()});
-    var m=document.getElementById('ad-mid'),p=document.querySelectorAll('.prose>p')[1];if(m&&p)p.after(m);})();
+    (function(){
+      var th=document.getElementById('th');
+      th.addEventListener('click',function(){var r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}});
+      document.addEventListener('click',function(e){var d=document.querySelector('.lg');if(d&&!d.contains(e.target))d.open=false});
+      var n=Date.now();document.querySelectorAll('.ad').forEach(function(a){var s=a.dataset.start,e=a.dataset.end;if((s&&n<Date.parse(s))||(e&&n>Date.parse(e)))a.remove()});
+      var m=document.getElementById('ad-mid'),p=document.querySelectorAll('.prose>p')[1];if(m&&p)p.after(m);
+    })();
   </script>
 </body>
 </html>

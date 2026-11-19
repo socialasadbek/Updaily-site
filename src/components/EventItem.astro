@@ -1,0 +1,10 @@
+---
+import { months, type Locale } from '../i18n/config';
+const { e, locale } = Astro.props as { e: any; locale: Locale };
+const d = e.data.date as Date;
+const Tag = e.data.url ? 'a' : 'div';
+---
+<Tag class="ev" href={e.data.url} target={e.data.url ? '_blank' : undefined} rel={e.data.url ? 'noopener' : undefined}>
+  <div class="bd"><b>{d.getUTCDate()}</b><span>{months[locale][d.getUTCMonth()]}</span></div>
+  <div><div class="et">{e.data.title}</div>{e.data.place && <div class="ep">{e.data.place}</div>}</div>
+</Tag>

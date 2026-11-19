@@ -10,9 +10,10 @@ export async function onRequestGet({ request, waitUntil }) {
     return new Response(JSON.stringify({ error: 'upstream' }), { status: 502, headers: { 'content-type': 'application/json' } });
   }
   const all = await up.json();
-  const want = ['USD', 'EUR', 'RUB'];
-  const rates = all
-    .filter((x) => want.includes(x.Ccy))
+  const want = ['USD', 'EUR', 'RUB', 'GBP', 'CNY', 'KZT', 'TRY', 'AED'];
+  const rates = want
+    .map((c) => all.find((x) => x.Ccy === c))
+    .filter(Boolean)
     .map((x) => ({ ccy: x.Ccy, rate: Number(x.Rate), diff: Number(x.Diff), date: x.Date }));
 
   const res = new Response(JSON.stringify({ rates }), {
