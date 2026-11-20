@@ -166,7 +166,7 @@ collections:
     summary: "{{title}} ({{date}})"
     fields:
       - { label: Nomi, name: title, widget: string }
-      - { label: Sana, name: date, widget: date, format: "YYYY-MM-DD" }
+      - { label: "Sana", name: "date", widget: "datetime", type: "date" }
       - { label: Boshlanish vaqti, name: time, widget: string, required: false, hint: "Masalan: 18:00" }
       - { label: Rasm, name: image, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha." }
       - { label: "Qisqacha ma'lumot", name: summary, widget: text, required: false }
