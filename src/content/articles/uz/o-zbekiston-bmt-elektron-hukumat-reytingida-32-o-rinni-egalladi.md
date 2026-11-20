@@ -2,9 +2,10 @@
 translationKey: uzbekistan-un-egdi-2026
 title: O'zbekiston BMT elektron hukumat reytingida 32-o'rinni egalladi
 date: 2026-11-20T06:23:00
+updated: ''
 author: asadbek-botirov
 category: technology
-cover: /uploads/39806.png
+cover: /uploads/39821.png
 coverAlt: O'zbekistonda elektron hukumat va raqamli davlat xizmatlari
 summary: O'zbekiston BMTning 2026-yilgi Elektron hukumat tadqiqotida 194 ta davlat orasida 32-o'rinni egalladi. Mamlakat ilk bor "Very High EGDI" guruhiga kirdi. 2020-yilga nisbatan 55 pog'ona yuqorilandi.
 keyPoints:
