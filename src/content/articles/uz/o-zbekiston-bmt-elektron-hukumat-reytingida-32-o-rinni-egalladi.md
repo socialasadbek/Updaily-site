@@ -2,6 +2,7 @@
 translationKey: uzbekistan-un-egdi-2026
 title: O'zbekiston BMT elektron hukumat reytingida 32-o'rinni egalladi
 date: 2026-11-20T06:23:00
+updated: ''
 author: asadbek-botirov
 category: technology
 cover: /uploads/39821.png
@@ -19,7 +20,7 @@ tags:
   - O'zbekiston
   - Raqamli iqtisodiyot
 sources:
-  - title: Raqamli texnalogiylar vazirligi
+  - title: Raqamli texnalogiyalar vazirligi
     url: https://t.me/mitcuz/25615
   - title: Xushnudbek Uz
     url: https://t.me/xushnudbek/35158
@@ -32,7 +33,7 @@ seoDescription: O'zbekiston BMTning 2026-yilgi elektron hukumat tadqiqotida 32-o
 
 Prezident Shavkat Mirziyoyev rahbarligida mamlakatda raqamli iqtisodiyotni rivojlantirish, davlat boshqaruviga zamonaviy axborot texnologiyalarini joriy etish va davlat xizmatlari sifatini oshirishga qaratilgan islohotlar amalga oshirilmoqda.
 
-"O'zbekiston — 2030" strategiyasida mamlakatni BMTning Elektron hukumatni rivojlantirish indeksi (UN EGDI) bo'yicha dunyoning eng ilg'or 30 ta davlati qatoriga olib chiqish ustuvor vazifalardan biri etib belgilangan.
+"O'zbekiston - 2030" strategiyasida mamlakatni BMTning Elektron hukumatni rivojlantirish indeksi (UN EGDI) bo'yicha dunyoning eng ilg'or 30 ta davlati qatoriga olib chiqish ustuvor vazifalardan biri etib belgilangan.
 
 ## Reytingdagi natija
 
