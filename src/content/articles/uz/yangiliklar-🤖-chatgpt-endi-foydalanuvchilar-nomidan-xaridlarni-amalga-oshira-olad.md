@@ -2,7 +2,6 @@
 translationKey: Ai-gpt
 title: Yangiliklar 🤖 ChatGPT endi foydalanuvchilar nomidan xaridlarni amalga oshira olad
 date: 2026-11-15T10:09:00Z
-updated: ''
 author: asadbek-botirov
 category: news
 cover: /uploads/39790.jpg
