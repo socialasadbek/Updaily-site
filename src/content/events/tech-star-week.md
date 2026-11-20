@@ -10,7 +10,7 @@ summary: |-
 place: HUMO Arena, Toshkent
 map: ''
 url: https://go.hackonnect.uz/7LgMf
-lang: all
+lang: uz
 ---
 
 3 kun, 3 ta sahna, körgazma va parallel sessiyalar, jumladan, maʼruzalar, workshoplar, ekspertlar muloqoti va networking.
