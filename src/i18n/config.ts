@@ -26,7 +26,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     rates: 'Valyutalar kursi', events: 'Tadbirlar', calendar: 'Tadbirlar taqvimi', upcoming: 'Yaqin tadbirlar', past: "O'tgan tadbirlar",
     about: 'Biz haqimizda', advertising: 'Reklama', contact: "Bog'lanish", policy: 'Tahririy siyosat', privacy: 'Maxfiylik siyosati',
     terms: 'Foydalanish shartlari', report: 'Xatoni xabar qiling', more: "Ko'proq yangiliklarni yuklash", editorIn: 'Bosh muharrir',
-    lang: 'Til', theme: 'Tungi rejim', team: 'Jamoa', rateNote: 'Markaziy bank kursi', articlesBy: 'Muallif maqolalari', expertise: 'Yo‘nalishlar',
+    lang: 'Til', theme: 'Tungi rejim', team: 'Jamoa', rateNote: 'Markaziy bank kursi', articlesBy: 'Muallif maqolalari', expertise: 'Yo‘nalishlar', where: 'Manzil', openMap: 'Xaritada ochish', register: "Batafsil va ro'yxatdan o'tish",
   },
   cyrl: {
     news: 'Янгиликлар', articles: 'Мақолалар', startups: 'Стартаплар', business: 'Бизнес', investments: 'Инвестициялар',
@@ -38,7 +38,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     rates: 'Валюталар курси', events: 'Тадбирлар', calendar: 'Тадбирлар тақвими', upcoming: 'Яқин тадбирлар', past: 'Ўтган тадбирлар',
     about: 'Биз ҳақимизда', advertising: 'Реклама', contact: 'Боғланиш', policy: 'Таҳририй сиёсат', privacy: 'Махфийлик сиёсати',
     terms: 'Фойдаланиш шартлари', report: 'Хатони хабар қилинг', more: 'Кўпроқ янгиликларни юклаш', editorIn: 'Бош муҳаррир',
-    lang: 'Тил', theme: 'Тунги режим', team: 'Жамоа', rateNote: 'Марказий банк курси', articlesBy: 'Муаллиф мақолалари', expertise: 'Йўналишлар',
+    lang: 'Тил', theme: 'Тунги режим', team: 'Жамоа', rateNote: 'Марказий банк курси', articlesBy: 'Муаллиф мақолалари', expertise: 'Йўналишлар', where: 'Манзил', openMap: 'Харитада очиш', register: 'Батафсил ва рўйхатдан ўтиш',
   },
   ru: {
     news: 'Новости', articles: 'Статьи', startups: 'Стартапы', business: 'Бизнес', investments: 'Инвестиции',
@@ -50,7 +50,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     rates: 'Курсы валют', events: 'События', calendar: 'Календарь событий', upcoming: 'Ближайшие события', past: 'Прошедшие события',
     about: 'О нас', advertising: 'Реклама', contact: 'Контакты', policy: 'Редакционная политика', privacy: 'Политика конфиденциальности',
     terms: 'Условия использования', report: 'Сообщить об ошибке', more: 'Загрузить ещё', editorIn: 'Главный редактор',
-    lang: 'Язык', theme: 'Тёмная тема', team: 'Команда', rateNote: 'Курс Центрального банка', articlesBy: 'Статьи автора', expertise: 'Направления',
+    lang: 'Язык', theme: 'Тёмная тема', team: 'Команда', rateNote: 'Курс Центрального банка', articlesBy: 'Статьи автора', expertise: 'Направления', where: 'Место', openMap: 'Открыть на карте', register: 'Подробнее и регистрация',
   },
   en: {
     news: 'News', articles: 'Articles', startups: 'Startups', business: 'Business', investments: 'Investments',
@@ -62,7 +62,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     rates: 'Exchange rates', events: 'Events', calendar: 'Events calendar', upcoming: 'Upcoming events', past: 'Past events',
     about: 'About us', advertising: 'Advertising', contact: 'Contact', policy: 'Editorial policy', privacy: 'Privacy policy',
     terms: 'Terms of use', report: 'Report an error', more: 'Load more news', editorIn: 'Editor-in-chief',
-    lang: 'Language', theme: 'Dark mode', team: 'Team', rateNote: 'Central Bank rate', articlesBy: 'Articles by author', expertise: 'Expertise',
+    lang: 'Language', theme: 'Dark mode', team: 'Team', rateNote: 'Central Bank rate', articlesBy: 'Articles by author', expertise: 'Expertise', where: 'Location', openMap: 'Open in maps', register: 'Details and registration',
   },
 };
 

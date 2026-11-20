@@ -1,10 +1,11 @@
 ---
-import { months, type Locale } from '../i18n/config';
+import { months, localePath, type Locale } from '../i18n/config';
 const { e, locale } = Astro.props as { e: any; locale: Locale };
 const d = e.data.date as Date;
-const Tag = e.data.url ? 'a' : 'div';
+const meta = [e.data.time, e.data.place].filter(Boolean).join(' · ');
 ---
-<Tag class="ev" href={e.data.url} target={e.data.url ? '_blank' : undefined} rel={e.data.url ? 'noopener' : undefined}>
+<a class="ev" href={localePath(locale, `/events/${e.id}`)}>
   <div class="bd"><b>{d.getUTCDate()}</b><span>{months[locale][d.getUTCMonth()]}</span></div>
-  <div><div class="et">{e.data.title}</div>{e.data.place && <div class="ep">{e.data.place}</div>}</div>
-</Tag>
+  <div class="evt"><div class="et">{e.data.title}</div>{meta && <div class="ep">{meta}</div>}</div>
+  {e.data.image && <img class="evimg" src={e.data.image} alt="" loading="lazy" width="84" height="47" />}
+</a>

@@ -169,3 +169,8 @@ img,video,iframe{max-width:100%;height:auto}
   footer{padding:20px 12px}
   .soc a{width:40px;height:40px}
 }
+.evt{flex:1;min-width:0}
+.evimg{flex:0 0 84px;width:84px;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:var(--line)}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.btn{display:inline-block;padding:12px 18px;border-radius:12px;background:var(--red);color:#fff;font-weight:700}
+.btn.ghost{background:none;border:1px solid var(--red);color:var(--red)}

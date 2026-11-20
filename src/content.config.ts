@@ -45,7 +45,11 @@ const events = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    time: z.string().optional(),
+    image: z.string().optional(),
+    summary: z.string().optional(),
     place: z.string().optional(),
+    map: z.string().optional(),
     url: z.string().optional(),
     lang: z.enum(['all', 'uz', 'cyrl', 'ru', 'en']).default('all'),
   }),

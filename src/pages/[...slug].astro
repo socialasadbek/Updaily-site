@@ -5,12 +5,13 @@ import Row from '../components/Row.astro';
 import Share from '../components/Share.astro';
 import Ad from '../components/Ad.astro';
 import EventItem from '../components/EventItem.astro';
-import { locales, defaultLocale, categories, localePath, t, type Locale } from '../i18n/config';
+import { locales, defaultLocale, categories, localePath, months, t, type Locale } from '../i18n/config';
 import { allArticles, byLocale, slugOf, alternates, readMin, fmtDate, articleUrl, eventsFor, getPage, PAGE_SLUGS, settings } from '../lib/content';
 
 export async function getStaticPaths() {
   const all = await allArticles();
   const authors = await getCollection('authors');
+  const events = await getCollection('events');
   const out: any[] = [];
   for (const l of locales) {
     const pre = l === defaultLocale ? '' : l;
@@ -22,13 +23,14 @@ export async function getStaticPaths() {
     for (const c of categories) out.push({ params: { slug: j(`c/${c}`) }, props: { type: 'category', locale: l, category: c } });
     for (const p of PAGE_SLUGS) out.push({ params: { slug: j(p) }, props: { type: 'page', locale: l, page: p } });
     for (const a of authors) out.push({ params: { slug: j(`author/${a.id}`) }, props: { type: 'author', locale: l, authorId: a.id } });
+    for (const e of events) if (e.data.lang === 'all' || e.data.lang === l) out.push({ params: { slug: j(`events/${e.id}`) }, props: { type: 'event', locale: l, eventId: e.id } });
     for (const a of byLocale(all, l)) out.push({ params: { slug: j(`a/${slugOf(a)}`) }, props: { type: 'article', locale: l, id: a.id } });
   }
   return out;
 }
 
-const { type, locale, category, id, page, authorId } = Astro.props as {
-  type: string; locale: Locale; category?: string; id?: string; page?: string; authorId?: string;
+const { type, locale, category, id, page, authorId, eventId } = Astro.props as {
+  type: string; locale: Locale; category?: string; id?: string; page?: string; authorId?: string; eventId?: string;
 };
 const all = await allArticles();
 const mine = byLocale(all, locale);
@@ -136,6 +138,43 @@ fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
         {up.map((e) => <EventItem e={e} locale={locale} />)}
         {past.length > 0 && (<><h2 class="h2">{t(locale, 'past')}</h2>{past.map((e) => <EventItem e={e} locale={locale} />)}</>)}
       </main>
+    </Base>
+  );
+})()}
+
+{type === 'event' && await (async () => {
+  const ev = (await getCollection('events')).find((x) => x.id === eventId)!;
+  const { Content } = await render(ev);
+  const d = ev.data;
+  const dt = d.date;
+  const dateStr = `${dt.getUTCDate()} ${months[locale][dt.getUTCMonth()]} ${dt.getUTCFullYear()}`;
+  const map = d.map ?? (d.place ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.place)}` : undefined);
+  const iso = dt.toISOString().slice(0, 10);
+  const hm = d.time?.match(/^(\d{1,2}):(\d{2})/);
+  const start = hm ? `${iso}T${hm[1].padStart(2, '0')}:${hm[2]}:00+05:00` : iso;
+  const p = L(`/events/${ev.id}`);
+  const ld = {
+    '@context': 'https://schema.org', '@type': 'Event', name: d.title, startDate: start, description: d.summary,
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    location: d.place ? { '@type': 'Place', name: d.place } : undefined,
+    image: d.image ? `${site}${d.image}` : undefined, url: `${site}${p}`,
+  };
+  return (
+    <Base locale={locale} title={d.title} description={d.summary ?? d.title} path={p} image={d.image} jsonLd={ld}
+      alts={d.lang === 'all' ? allLocales(`/events/${ev.id}`) : { [locale]: p }}>
+      <article class="wrap narrow">
+        <div class="crumbs"><a href={L()}>{t(locale, 'home')}</a> / <a href={L('/events')}>{t(locale, 'events')}</a></div>
+        <h1>{d.title}</h1>
+        <div class="info"><span class="cat">{dateStr}{d.time && ` · ${d.time}`}</span></div>
+        {d.image && <img class="cover" src={d.image} alt={d.title} width="1280" height="720" fetchpriority="high" />}
+        {d.summary && <p class="prose">{d.summary}</p>}
+        {d.place && <div class="keybox"><b>{t(locale, 'where')}</b><div>{d.place}</div></div>}
+        <div class="btns">
+          {map && <a class="btn" href={map} target="_blank" rel="noopener">{t(locale, 'openMap')}</a>}
+          {d.url && <a class="btn ghost" href={d.url} target="_blank" rel="noopener">{t(locale, 'register')}</a>}
+        </div>
+        <div class="prose"><Content /></div>
+      </article>
     </Base>
   );
 })()}

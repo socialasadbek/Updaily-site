@@ -165,11 +165,16 @@ collections:
     format: frontmatter
     summary: "{{title}} ({{date}})"
     fields:
-      - { label: "Sana", name: "date", widget: "datetime", type: "date" }
-      
-      - { label: Joyi, name: place, widget: string, required: false }
-      - { label: Havola, name: url, widget: string, required: false }
+      - { label: Nomi, name: title, widget: string }
+      - { label: Sana, name: date, widget: date, format: "YYYY-MM-DD" }
+      - { label: Boshlanish vaqti, name: time, widget: string, required: false, hint: "Masalan: 18:00" }
+      - { label: Rasm, name: image, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha." }
+      - { label: "Qisqacha ma'lumot", name: summary, widget: text, required: false }
+      - { label: Joy nomi, name: place, widget: string, required: false, hint: "Masalan: HUMO arena, Toshkent" }
+      - { label: Xarita havolasi, name: map, widget: string, required: false, hint: "Google yoki Yandex xaritadagi Ulashish havolasi. Bo'sh qolsa, joy nomi bo'yicha qidiruv ochiladi." }
+      - { label: "Ro'yxatdan o'tish yoki sayt havolasi", name: url, widget: string, required: false }
       - { label: Til, name: lang, widget: select, options: [all, uz, cyrl, ru, en], default: all, hint: "all = hamma tilda ko'rinadi" }
+      - { label: "To'liq ma'lumot", name: body, widget: markdown, required: false }
 
   - name: authors
     label: Mualliflar
