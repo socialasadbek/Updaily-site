@@ -1,8 +1,7 @@
 ---
 translationKey: uzbekistan-un-egdi-2026
 title: O'zbekiston BMT elektron hukumat reytingida 32-o'rinni egalladi
-date: 2026-11-20T06:23:00Z
-
+date: 2026-11-20T06:23:00
 author: asadbek-botirov
 category: technology
 cover: /uploads/39806.png
