@@ -40,16 +40,20 @@ const allLocales = (p: string) => Object.fromEntries(locales.map((l) => [l, loca
 const site = Astro.site!.toString().replace(/\/$/, '');
 const contact = (settings as any).contact;
 const ratesScript = `
-fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
-  var f=function(n){return n.toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2})};
-  var h=document.getElementById('rates');
-  if(h)h.innerHTML=d.rates.filter(function(x){return x.ccy==='USD'||x.ccy==='EUR'}).map(function(x){
-    return '<div><b>'+x.ccy+'</b>'+f(x.rate)+' <small class="'+(x.diff>=0?'up':'')+'">'+(x.diff>0?'+':'')+x.diff+'</small></div>'}).join('');
-  var t=document.getElementById('rt');
-  if(t){t.innerHTML=d.rates.map(function(x){
-    return '<tr><td><b>'+x.ccy+'</b></td><td>'+f(x.rate)+'</td><td class="'+(x.diff>=0?'up':'dn')+'">'+(x.diff>0?'+':'')+x.diff+'</td></tr>'}).join('');
-    var dd=document.getElementById('rd');if(dd&&d.rates[0])dd.textContent=d.rates[0].date}
-}).catch(function(){});
+function loadRates(){
+  fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
+    var f=function(n){return n.toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2})};
+    var h=document.getElementById('rates');
+    if(h)h.innerHTML=d.rates.filter(function(x){return x.ccy==='USD'||x.ccy==='EUR'}).map(function(x){
+      return '<div><b>'+x.ccy+'</b>'+f(x.rate)+' <small class="'+(x.diff>=0?'up':'')+'">'+(x.diff>0?'+':'')+x.diff+'</small></div>'}).join('');
+    var t=document.getElementById('rt');
+    if(t){t.innerHTML=d.rates.map(function(x){
+      return '<tr><td><b>'+x.ccy+'</b></td><td>'+f(x.rate)+'</td><td class="'+(x.diff>=0?'up':'dn')+'">'+(x.diff>0?'+':'')+x.diff+'</td></tr>'}).join('');
+      var dd=document.getElementById('rd');if(dd&&d.rates[0])dd.textContent=d.rates[0].date}
+  }).catch(function(){});
+}
+loadRates();
+setInterval(loadRates, 60000);
 `;
 ---
 {type === 'home' && await (async () => {
