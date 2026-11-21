@@ -425,3 +425,12 @@ html, body {
     overflow: visible !important;
   }
 } 
+@media (max-width: 768px) {
+  .art-main img.cover {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    max-height: none;
+    object-fit: cover;
+  }
+}
