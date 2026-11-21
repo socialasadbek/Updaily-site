@@ -80,11 +80,9 @@ setInterval(loadRates, 60000);
               </a>
             ))}
           </div>
-          <div class="tools">
+                    <div class="tools">
             <a class="rates" id="rates" href={L('/rates')} aria-label={t(locale, 'rates')}></a>
-            <a class="ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
           </div>
-        </div>
         <aside class="hero-latest">
           <h2 class="hero-title">{t(locale, 'latest')}</h2>
           {mine.slice(0, 3).map((a) => (
