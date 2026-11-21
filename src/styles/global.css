@@ -180,3 +180,32 @@ img,video,iframe{max-width:100%;height:auto}
 .top-banner { width: 100%; max-width: 1280px; margin: 12px auto; padding: 0 16px; box-sizing: border-box; }
 .top-banner img, .top-banner video { display: block; width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
 @media (max-width: 768px) { .top-banner img, .top-banner video { height: 100px; } }
+header .bar {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px 16px;
+}
+header .logo { flex: 0 0 auto; }
+header .logo img { display: block; }
+header .cats {
+  flex: 1 1 auto;
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow: visible;
+  white-space: normal;
+}
+header .cats a {
+  padding: 6px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+header .cats a.on { background: #e11d2e; color: #fff; }
+header .g.r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
