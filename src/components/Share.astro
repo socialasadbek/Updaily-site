@@ -29,8 +29,10 @@ const share = [
 
 <style>
   .share { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
-  .share a, .share button {
-    width: 44px; height: 44px; border-radius: 50%;
+    .share a, .share button {
+    width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+    flex: 0 0 44px; aspect-ratio: 1 / 1;
+    border-radius: 50%;
     display: inline-flex; align-items: center; justify-content: center;
     border: 0; color: #fff; cursor: pointer; text-decoration: none; padding: 0;
     transition: transform .15s ease, opacity .15s ease;
