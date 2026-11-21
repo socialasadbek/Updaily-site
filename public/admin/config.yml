@@ -62,6 +62,7 @@ collections:
         widget: select
         options: [news, articles, startups, business, investments, technology, research, interviews]
       - { label: Muqova rasmi, name: cover, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha. Boshqa o'lcham avtomatik 16:9 ga kesiladi." }
+      - { label: "YouTube video (ixtiyoriy)", name: video, widget: string, required: false, hint: "YouTube havolasini qo'ying. Kiritilsa, muqova rasm o'rniga video chiqadi." }
       - { label: Rasm tavsifi (alt), name: coverAlt, widget: string, required: false }
       - { label: "Qisqacha (2-3 gap)", name: summary, widget: text, required: false }
       - { label: "Asosiy fikrlar", name: keyPoints, widget: list, required: false, hint: "3-4 ta qisqa band. AI qidiruv va o'quvchi uchun foydali." }
@@ -99,6 +100,7 @@ collections:
         widget: select
         options: [news, articles, startups, business, investments, technology, research, interviews]
       - { label: Muqova rasmi, name: cover, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha. Boshqa o'lcham avtomatik 16:9 ga kesiladi." }
+      - { label: "YouTube video (ixtiyoriy)", name: video, widget: string, required: false, hint: "YouTube havolasini qo'ying. Kiritilsa, muqova rasm o'rniga video chiqadi." }
       - { label: Rasm tavsifi (alt), name: coverAlt, widget: string, required: false }
       - { label: "Qisqacha (2-3 gap)", name: summary, widget: text, required: false }
       - { label: "Asosiy fikrlar", name: keyPoints, widget: list, required: false, hint: "3-4 ta qisqa band. AI qidiruv va o'quvchi uchun foydali." }
@@ -136,6 +138,7 @@ collections:
         widget: select
         options: [news, articles, startups, business, investments, technology, research, interviews]
       - { label: Muqova rasmi, name: cover, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha. Boshqa o'lcham avtomatik 16:9 ga kesiladi." }
+      - { label: "YouTube video (ixtiyoriy)", name: video, widget: string, required: false, hint: "YouTube havolasini qo'ying. Kiritilsa, muqova rasm o'rniga video chiqadi." }
       - { label: Rasm tavsifi (alt), name: coverAlt, widget: string, required: false }
       - { label: "Qisqacha (2-3 gap)", name: summary, widget: text, required: false }
       - { label: "Asosiy fikrlar", name: keyPoints, widget: list, required: false, hint: "3-4 ta qisqa band. AI qidiruv va o'quvchi uchun foydali." }
@@ -173,6 +176,7 @@ collections:
         widget: select
         options: [news, articles, startups, business, investments, technology, research, interviews]
       - { label: Muqova rasmi, name: cover, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha. Boshqa o'lcham avtomatik 16:9 ga kesiladi." }
+      - { label: "YouTube video (ixtiyoriy)", name: video, widget: string, required: false, hint: "YouTube havolasini qo'ying. Kiritilsa, muqova rasm o'rniga video chiqadi." }
       - { label: Rasm tavsifi (alt), name: coverAlt, widget: string, required: false }
       - { label: "Qisqacha (2-3 gap)", name: summary, widget: text, required: false }
       - { label: "Asosiy fikrlar", name: keyPoints, widget: list, required: false, hint: "3-4 ta qisqa band. AI qidiruv va o'quvchi uchun foydali." }
