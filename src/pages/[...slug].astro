@@ -411,48 +411,34 @@ setInterval(loadRates, 60000);
     .hero-main .slider img { height: auto; aspect-ratio: 16 / 9; }
   }
 
-  .art-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 300px;
-    gap: 32px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
-    align-items: start;
-  }
-  .art-main { min-width: 0; }
-  .art-side { position: sticky; top: 90px; }
-  .art-side-title {
-    font-size: 18px;
-    margin: 0 0 12px;
-    padding-bottom: 8px;
+    .art-side-title {
+    font-size: 22px;
+    margin: 0 0 14px;
+    padding-bottom: 10px;
     border-bottom: 2px solid #e11d2e;
   }
   .art-rec {
     display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 10px;
-    padding: 10px 0;
+    grid-template-columns: 150px 1fr;
+    gap: 14px;
+    padding: 14px 0;
     border-bottom: 1px solid rgba(128, 128, 128, .25);
     color: inherit;
     text-decoration: none;
   }
   .art-rec img {
-    width: 110px;
-    height: 70px;
+    width: 150px;
+    height: 96px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 8px;
   }
   .art-rec h3 {
-    margin: 0 0 4px;
-    font-size: 14px;
+    margin: 0 0 6px;
+    font-size: 17px;
     line-height: 1.35;
     font-weight: 600;
   }
   .art-rec:hover h3 { color: #e11d2e; }
-  .art-rec small { opacity: .6; font-size: 11px; }
-  @media (max-width: 900px) {
-    .art-layout { grid-template-columns: 1fr; }
-    .art-side { position: static; }
+  .art-rec small { opacity: .6; font-size: 13px; }
   }
 </style>
