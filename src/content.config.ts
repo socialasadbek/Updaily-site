@@ -13,6 +13,7 @@ const articles = defineCollection({
     author: z.string().optional(),
     category: z.enum(cats),
     cover: z.string().optional(),
+    video: z.string().optional(),
     coverAlt: z.string().optional(),
     summary: z.string().optional(),
     keyPoints: z.array(z.string()).default([]),
