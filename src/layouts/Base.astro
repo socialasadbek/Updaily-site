@@ -119,14 +119,54 @@ const year = new Date().getFullYear();
     </p>
     <p>{c.phones.map((p: string, i: number) => <><a class="ul" href={`tel:${p.replace(/[^\d+]/g, '')}`}>{p}</a>{i < c.phones.length - 1 && ' · '}</>)}</p>
   </footer>
-  <script is:inline>
-    (function(){
-      var th=document.getElementById('th');
-      th.addEventListener('click',function(){var r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}});
-      document.addEventListener('click',function(e){var d=document.querySelector('.lg');if(d&&!d.contains(e.target))d.open=false});
-      var n=Date.now();document.querySelectorAll('.ad').forEach(function(a){var s=a.dataset.start,e=a.dataset.end;if((s&&n<Date.parse(s))||(e&&n>Date.parse(e)))a.remove()});
-      var m=document.getElementById('ad-mid'),p=document.querySelectorAll('.prose>p')[1];if(m&&p)p.after(m);
-    })();
+    <script is:inline>
+(function(){
+  var th=document.getElementById('th');
+  if(th)th.addEventListener('click',function(){
+    var r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark';
+    r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}
+  });
+
+  document.addEventListener('click',function(e){
+    var d=document.querySelector('.lg');if(d&&!d.contains(e.target))d.open=false;
+  });
+
+  var now=Date.now();
+  document.querySelectorAll('.ad').forEach(function(a){
+    var s=a.dataset.start,e=a.dataset.end;
+    if((s&&now<Date.parse(s))||(e&&now>Date.parse(e)))a.remove();
+  });
+
+  var m=document.getElementById('ad-mid'),p=document.querySelectorAll('.prose>p')[1];
+  if(m&&p)p.after(m);
+
+  var sb=document.getElementById('sbtn'),sp=document.getElementById('spanel'),sui=document.getElementById('sui'),pf=false;
+
+  function loadPF(){
+    if(pf)return; pf=true;
+    var css=document.createElement('link');
+    css.rel='stylesheet'; css.href='/pagefind/pagefind-ui.css';
+    document.head.appendChild(css);
+    var js=document.createElement('script');
+    js.src='/pagefind/pagefind-ui.js';
+    js.onload=function(){
+      try{ new PagefindUI({element:'#sui',showImages:false,showSubResults:false}); }
+      catch(err){ sui.textContent='Qidiruv yuklanmadi'; }
+    };
+    js.onerror=function(){ sui.textContent='Qidiruv hozir ishlamayapti'; };
+    document.body.appendChild(js);
+  }
+
+  if(sb&&sp){
+    sb.addEventListener('click',function(e){
+      e.preventDefault();
+      var open=sp.hidden;
+      sp.hidden=!open;
+      if(open){
+        loadPF();
+        setTimeout(function(){var i=sp.querySelector('input');if(i)i.focus()},300);
+      }
+    });
+  }
+})();
   </script>
-</body>
-</html>
