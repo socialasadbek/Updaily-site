@@ -8,27 +8,18 @@ public_folder: /uploads
 site_url: https://updaily.uz
 
 collections:
-  - name: menu
-    label: Menyu
+   - name: banner
+    label: Tepadagi reklama
     files:
-      - name: menu
-        label: Yuqori menyu
-        file: src/data/menu.json
+      - name: banner
+        label: Tepadagi reklama
+        file: src/data/banner.json
         format: json
         fields:
-          - label: Bo'limlar
-            name: items
-            widget: list
-            fields:
-              - { label: Bo'lim slugi, name: slug, widget: string, hint: "Faqat mavjud: news, articles, startups, business, investments, technology, research, interviews" }
-              - label: Nomi
-                name: title
-                widget: object
-                fields:
-                  - { label: "O'zbek (lotin)", name: uz, widget: string }
-                  - { label: "Ўзбек (кирилл)", name: cyrl, widget: string }
-                  - { label: Русский, name: ru, widget: string }
-                  - { label: English, name: en, widget: string }
+          - { label: Turi, name: type, widget: select, options: [image, video] }
+          - { label: "Fayl (rasm, GIF yoki video)", name: src, widget: file, hint: "Rasm: 1280x200 px atrofida. Video: MP4, ovozsiz." }
+          - { label: Havola (ixtiyoriy), name: link, widget: string, required: false }
+          - { label: "Qisqa tavsif", name: alt, widget: string, required: false }
   - name: articles_uz
     label: "Maqolalar — O'zbek (lotin)"
     folder: src/content/articles/uz
