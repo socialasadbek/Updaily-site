@@ -20,7 +20,7 @@ tags:
   - payment
   - bank
 sources:
-  - title: THe Central Bank of the Respublic Uzbekistan
+  - title: The Central Bank of the Respublic Uzbekistan
     url: https://cbu.uz/uz/press_center/releases/4939826/
 featured: true
 sponsored: false
