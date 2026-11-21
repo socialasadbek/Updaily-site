@@ -94,7 +94,7 @@ const year = new Date().getFullYear();
           <summary aria-label={t(locale, 'lang')}><Icon name="globe" /> {langCode[locale]}</summary>
           <div class="lgm">{locales.map((l) => <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langName[l]}</a>)}</div>
         </details>
-        <a class="ic search-ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
+       <button class="ic search-ic" id="sbtn" type="button" aria-label={t(locale, 'search')}>⌕</button>
         <button class="theme-switch" id="th" type="button" aria-label={t(locale, 'theme')}>
           <span class="sun">☀</span><span class="moon">☾</span>
         </button>
@@ -102,6 +102,11 @@ const year = new Date().getFullYear();
       </div>
     </div>
   </header>
+  <div class="spanel" id="spanel" hidden>
+    <div class="spanel-inner">
+      <div id="sui"></div>
+    </div>
+  </div>
   <slot />
   <footer>
     <div class="soc">{S.socials.map((s: any) => <a href={s.url} target="_blank" rel="noopener" aria-label={names[s.type] ?? s.type}><Icon name={s.type} /></a>)}</div>
