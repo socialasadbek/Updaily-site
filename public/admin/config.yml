@@ -35,3 +35,5 @@ collections:
           - { label: "Qisqa tavsif", name: alt, widget: string, required: false }
 
   - name: articles_uz
+    label: "Maqolalar — O'zbek (lotin)"
+    ...
