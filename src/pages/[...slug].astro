@@ -315,7 +315,7 @@ setInterval(loadRates, 60000);
           <a class="rep" href={mail}>{t(locale, 'report')}</a>
           {d.tags.length > 0 && (<><div class="lbl">{t(locale, 'tags')}</div><div class="tags">{d.tags.map((x) => <span>{x}</span>)}</div></>)}
           <h2 class="h2">{t(locale, 'follow')}</h2>
-          <Share url={url} title={d.title} locale={locale} />
+                    <Share url={url} title={d.title} locale={locale} />
           <Ad slot="article-bottom" locale={locale} />
         </article>
         <aside class="art-side">
