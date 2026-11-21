@@ -1,3 +1,12 @@
+backend:
+  name: github
+  repo: socialasadbek/Updaily-site
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+site_url: https://updaily.uz
+
 collections:
   - name: menu
     label: Menyu
@@ -36,4 +45,278 @@ collections:
 
   - name: articles_uz
     label: "Maqolalar — O'zbek (lotin)"
-    ...
+    folder: src/content/articles/uz
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} ({{date}})"
+    fields:
+      - { label: Sarlavha, name: title, widget: string }
+      - { label: "Tarjima kaliti", name: translationKey, widget: string, required: false, hint: "Boshqa tillardagi shu maqola bilan bir xil yozing (masalan: ai-startap-2026). Tillarni bog'laydi." }
+      - { label: "Nashr sanasi (Toshkent vaqti)", name: date, widget: datetime, picker_utc: true }
+      - { label: Yangilangan sana, name: updated, widget: datetime, picker_utc: true, required: false }
+      - { label: Muallif, name: author, widget: relation, collection: authors, search_fields: [name], value_field: "{{slug}}", display_fields: [name], required: false }
+      - label: Bo'lim
+        name: category
+        widget: select
+        options: [news, articles, startups, business, investments, technology, research, interviews]
+      - { label: Muqova rasmi, name: cover, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha. Boshqa o'lcham avtomatik 16:9 ga kesiladi." }
+      - { label: Rasm tavsifi (alt), name: coverAlt, widget: string, required: false }
+      - { label: "Qisqacha (2-3 gap)", name: summary, widget: text, required: false }
+      - { label: "Asosiy fikrlar", name: keyPoints, widget: list, required: false, hint: "3-4 ta qisqa band. AI qidiruv va o'quvchi uchun foydali." }
+      - { label: Teglar, name: tags, widget: list, required: false }
+      - label: Manbalar
+        name: sources
+        widget: list
+        required: false
+        fields:
+          - { label: Nomi, name: title, widget: string }
+          - { label: Havola, name: url, widget: string }
+      - { label: "Muhim (bosh sahifa slayderi)", name: featured, widget: boolean, default: false }
+      - { label: "Homiylik materiali", name: sponsored, widget: boolean, default: false }
+      - { label: Nashr qilingan, name: published, widget: boolean, default: true }
+      - { label: SEO sarlavha, name: seoTitle, widget: string, required: false }
+      - { label: SEO tavsif, name: seoDescription, widget: text, required: false }
+      - { label: Matn, name: body, widget: markdown, hint: "Matnni belgilab havola tugmasini bosing." }
+
+  - name: articles_cyrl
+    label: "Maqolalar — Ўзбек (кирилл)"
+    folder: src/content/articles/cyrl
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} ({{date}})"
+    fields:
+      - { label: Sarlavha, name: title, widget: string }
+      - { label: "Tarjima kaliti", name: translationKey, widget: string, required: false, hint: "Boshqa tillardagi shu maqola bilan bir xil yozing (masalan: ai-startap-2026). Tillarni bog'laydi." }
+      - { label: "Nashr sanasi (Toshkent vaqti)", name: date, widget: datetime, picker_utc: true }
+      - { label: Yangilangan sana, name: updated, widget: datetime, picker_utc: true, required: false }
+      - { label: Muallif, name: author, widget: relation, collection: authors, search_fields: [name], value_field: "{{slug}}", display_fields: [name], required: false }
+      - label: Bo'lim
+        name: category
+        widget: select
+        options: [news, articles, startups, business, investments, technology, research, interviews]
+      - { label: Muqova rasmi, name: cover, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha. Boshqa o'lcham avtomatik 16:9 ga kesiladi." }
+      - { label: Rasm tavsifi (alt), name: coverAlt, widget: string, required: false }
+      - { label: "Qisqacha (2-3 gap)", name: summary, widget: text, required: false }
+      - { label: "Asosiy fikrlar", name: keyPoints, widget: list, required: false, hint: "3-4 ta qisqa band. AI qidiruv va o'quvchi uchun foydali." }
+      - { label: Teglar, name: tags, widget: list, required: false }
+      - label: Manbalar
+        name: sources
+        widget: list
+        required: false
+        fields:
+          - { label: Nomi, name: title, widget: string }
+          - { label: Havola, name: url, widget: string }
+      - { label: "Muhim (bosh sahifa slayderi)", name: featured, widget: boolean, default: false }
+      - { label: "Homiylik materiali", name: sponsored, widget: boolean, default: false }
+      - { label: Nashr qilingan, name: published, widget: boolean, default: true }
+      - { label: SEO sarlavha, name: seoTitle, widget: string, required: false }
+      - { label: SEO tavsif, name: seoDescription, widget: text, required: false }
+      - { label: Matn, name: body, widget: markdown, hint: "Matnni belgilab havola tugmasini bosing." }
+
+  - name: articles_ru
+    label: "Maqolalar — Русский"
+    folder: src/content/articles/ru
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} ({{date}})"
+    fields:
+      - { label: Sarlavha, name: title, widget: string }
+      - { label: "Tarjima kaliti", name: translationKey, widget: string, required: false, hint: "Boshqa tillardagi shu maqola bilan bir xil yozing (masalan: ai-startap-2026). Tillarni bog'laydi." }
+      - { label: "Nashr sanasi (Toshkent vaqti)", name: date, widget: datetime, picker_utc: true }
+      - { label: Yangilangan sana, name: updated, widget: datetime, picker_utc: true, required: false }
+      - { label: Muallif, name: author, widget: relation, collection: authors, search_fields: [name], value_field: "{{slug}}", display_fields: [name], required: false }
+      - label: Bo'lim
+        name: category
+        widget: select
+        options: [news, articles, startups, business, investments, technology, research, interviews]
+      - { label: Muqova rasmi, name: cover, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha. Boshqa o'lcham avtomatik 16:9 ga kesiladi." }
+      - { label: Rasm tavsifi (alt), name: coverAlt, widget: string, required: false }
+      - { label: "Qisqacha (2-3 gap)", name: summary, widget: text, required: false }
+      - { label: "Asosiy fikrlar", name: keyPoints, widget: list, required: false, hint: "3-4 ta qisqa band. AI qidiruv va o'quvchi uchun foydali." }
+      - { label: Teglar, name: tags, widget: list, required: false }
+      - label: Manbalar
+        name: sources
+        widget: list
+        required: false
+        fields:
+          - { label: Nomi, name: title, widget: string }
+          - { label: Havola, name: url, widget: string }
+      - { label: "Muhim (bosh sahifa slayderi)", name: featured, widget: boolean, default: false }
+      - { label: "Homiylik materiali", name: sponsored, widget: boolean, default: false }
+      - { label: Nashr qilingan, name: published, widget: boolean, default: true }
+      - { label: SEO sarlavha, name: seoTitle, widget: string, required: false }
+      - { label: SEO tavsif, name: seoDescription, widget: text, required: false }
+      - { label: Matn, name: body, widget: markdown, hint: "Matnni belgilab havola tugmasini bosing." }
+
+  - name: articles_en
+    label: "Maqolalar — English"
+    folder: src/content/articles/en
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} ({{date}})"
+    fields:
+      - { label: Sarlavha, name: title, widget: string }
+      - { label: "Tarjima kaliti", name: translationKey, widget: string, required: false, hint: "Boshqa tillardagi shu maqola bilan bir xil yozing (masalan: ai-startap-2026). Tillarni bog'laydi." }
+      - { label: "Nashr sanasi (Toshkent vaqti)", name: date, widget: datetime, picker_utc: true }
+      - { label: Yangilangan sana, name: updated, widget: datetime, picker_utc: true, required: false }
+      - { label: Muallif, name: author, widget: relation, collection: authors, search_fields: [name], value_field: "{{slug}}", display_fields: [name], required: false }
+      - label: Bo'lim
+        name: category
+        widget: select
+        options: [news, articles, startups, business, investments, technology, research, interviews]
+      - { label: Muqova rasmi, name: cover, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha. Boshqa o'lcham avtomatik 16:9 ga kesiladi." }
+      - { label: Rasm tavsifi (alt), name: coverAlt, widget: string, required: false }
+      - { label: "Qisqacha (2-3 gap)", name: summary, widget: text, required: false }
+      - { label: "Asosiy fikrlar", name: keyPoints, widget: list, required: false, hint: "3-4 ta qisqa band. AI qidiruv va o'quvchi uchun foydali." }
+      - { label: Teglar, name: tags, widget: list, required: false }
+      - label: Manbalar
+        name: sources
+        widget: list
+        required: false
+        fields:
+          - { label: Nomi, name: title, widget: string }
+          - { label: Havola, name: url, widget: string }
+      - { label: "Muhim (bosh sahifa slayderi)", name: featured, widget: boolean, default: false }
+      - { label: "Homiylik materiali", name: sponsored, widget: boolean, default: false }
+      - { label: Nashr qilingan, name: published, widget: boolean, default: true }
+      - { label: SEO sarlavha, name: seoTitle, widget: string, required: false }
+      - { label: SEO tavsif, name: seoDescription, widget: text, required: false }
+      - { label: Matn, name: body, widget: markdown, hint: "Matnni belgilab havola tugmasini bosing." }
+
+  - name: events
+    label: Tadbirlar
+    folder: src/content/events
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} ({{date}})"
+    fields:
+      - { label: Nomi, name: title, widget: string }
+      - { label: "Sana", name: "date", widget: "datetime", type: "date" }
+      - { label: Boshlanish vaqti, name: time, widget: string, required: false, hint: "Masalan: 18:00" }
+      - { label: Rasm, name: image, widget: image, required: false, hint: "16:9 format: 1280×720 px, JPG yoki WebP, 500 KB gacha." }
+      - { label: "Qisqacha ma'lumot", name: summary, widget: text, required: false }
+      - { label: Joy nomi, name: place, widget: string, required: false, hint: "Masalan: HUMO arena, Toshkent" }
+      - { label: Xarita havolasi, name: map, widget: string, required: false, hint: "Google yoki Yandex xaritadagi Ulashish havolasi. Bo'sh qolsa, joy nomi bo'yicha qidiruv ochiladi." }
+      - { label: "Ro'yxatdan o'tish yoki sayt havolasi", name: url, widget: string, required: false }
+      - { label: Til, name: lang, widget: select, options: [all, uz, cyrl, ru, en], default: all, hint: "all = hamma tilda ko'rinadi" }
+      - { label: "To'liq ma'lumot", name: body, widget: markdown, required: false }
+
+  - name: authors
+    label: Mualliflar
+    folder: src/content/authors
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Ism, name: name, widget: string }
+      - { label: Lavozim, name: role, widget: string, required: false }
+      - { label: Rasm, name: photo, widget: image, required: false }
+      - { label: Bio, name: bio, widget: text, required: false }
+      - { label: "Yo'nalishlar", name: expertise, widget: list, required: false }
+      - { label: "Jamoa sahifasida ko'rsatish", name: team, widget: boolean, default: false }
+      - { label: Telegram, name: telegram, widget: string, required: false }
+      - { label: LinkedIn, name: linkedin, widget: string, required: false }
+
+  - name: pages_uz
+    label: "Sahifalar — O'zbek (lotin)"
+    folder: src/content/pages/uz
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}}"
+    fields:
+      - { label: Sarlavha, name: title, widget: string }
+      - { label: "Tavsif (SEO)", name: description, widget: text, required: false }
+      - { label: Matn, name: body, widget: markdown }
+
+  - name: pages_cyrl
+    label: "Sahifalar — Ўзбек (кирилл)"
+    folder: src/content/pages/cyrl
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}}"
+    fields:
+      - { label: Sarlavha, name: title, widget: string }
+      - { label: "Tavsif (SEO)", name: description, widget: text, required: false }
+      - { label: Matn, name: body, widget: markdown }
+
+  - name: pages_ru
+    label: "Sahifalar — Русский"
+    folder: src/content/pages/ru
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}}"
+    fields:
+      - { label: Sarlavha, name: title, widget: string }
+      - { label: "Tavsif (SEO)", name: description, widget: text, required: false }
+      - { label: Matn, name: body, widget: markdown }
+
+  - name: pages_en
+    label: "Sahifalar — English"
+    folder: src/content/pages/en
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}}"
+    fields:
+      - { label: Sarlavha, name: title, widget: string }
+      - { label: "Tavsif (SEO)", name: description, widget: text, required: false }
+      - { label: Matn, name: body, widget: markdown }
+
+  - name: settings
+    label: Sozlamalar
+    files:
+      - name: site
+        label: Kanallar, tarmoqlar, aloqa, reklama
+        file: src/data/settings.json
+        fields:
+          - label: Ijtimoiy tarmoqlar
+            name: socials
+            widget: list
+            fields:
+              - { label: Turi, name: type, widget: select, options: [telegram, facebook, instagram, youtube, linkedin, x] }
+              - { label: Havola, name: url, widget: string }
+          - label: Aloqa (sahifa pastida)
+            name: contact
+            widget: object
+            fields:
+              - { label: Email, name: email, widget: string }
+              - { label: "Telegram (support)", name: telegram, widget: string }
+              - { label: Telefonlar, name: phones, widget: list, field: { label: Telefon, name: phone, widget: string } }
+              - { label: Bosh muharrir ismi, name: editorName, widget: string }
+              - { label: Bosh muharrir LinkedIn, name: editorLinkedin, widget: string }
+          - label: Telegram kanallar
+            name: channels
+            widget: list
+            fields:
+              - { label: Nomi, name: label, widget: string }
+              - { label: Havola, name: url, widget: string }
+              - { label: Til, name: lang, widget: select, options: [uz, cyrl, ru, en], required: false, hint: "Maqola oxiridagi Telegram tugmasi shu til sahifasida shu kanalga olib boradi" }
+          - label: Reklama
+            name: ads
+            widget: list
+            required: false
+            fields:
+              - { label: Joyi, name: slot, widget: select, options: [home-top, home-middle, article-middle, article-bottom] }
+              - { label: Banner rasmi, name: image, widget: image, hint: "1200×400 px (3:1)" }
+              - { label: Bosilganda ochiladigan havola, name: url, widget: string }
+              - { label: Boshlanish sanasi, name: start, widget: datetime, picker_utc: true, required: false }
+              - { label: Tugash sanasi, name: end, widget: datetime, picker_utc: true, required: false }
+              - { label: Faol, name: active, widget: boolean, default: true }
