@@ -3,6 +3,10 @@ import '../styles/global.css';
 import Icon from '../components/Icon.astro';
 import { settings } from '../lib/content';
 import { locales, hreflang, langName, langCode, categories, localePath, t, type Locale } from '../i18n/config';
+import menu from '../data/menu.json';
+
+const menuItems = menu.items.filter((i) => (categories as readonly string[]).includes(i.slug));
+
 const { locale, title, description = '', path, alts = {}, image, type = 'website', jsonLd, cat } = Astro.props as {
   locale: Locale; title: string; description?: string; path: string;
   alts?: Partial<Record<Locale, string>>; image?: string; type?: string; jsonLd?: object; cat?: string;
@@ -64,7 +68,6 @@ const year = new Date().getFullYear();
       <nav>{S.socials.map((s: any) => <a class="m2" href={s.url} target="_blank" rel="noopener"><Icon name={s.type} /> {names[s.type] ?? s.type}</a>)}</nav>
     </div>
     <div class="small">{legal.map((i) => <a href={i.h}>{i.l}</a>)}</div>
-    
   </aside>
   <label class="scrim" for="m"></label>
   <header>
@@ -83,7 +86,11 @@ const year = new Date().getFullYear();
       </div>
     </div>
     <nav class="cats">
-      {categories.map((k) => <a class={k === cat ? 'on' : ''} href={L(`/c/${k}`)}>{t(locale, k)}</a>)}
+      {menuItems.map((item) => (
+        <a class={item.slug === cat ? 'on' : ''} href={L(`/c/${item.slug}`)}>
+          {item.title[locale] || t(locale, item.slug)}
+        </a>
+      ))}
     </nav>
   </header>
   <slot />
@@ -103,9 +110,4 @@ const year = new Date().getFullYear();
       var th=document.getElementById('th');
       th.addEventListener('click',function(){var r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}});
       document.addEventListener('click',function(e){var d=document.querySelector('.lg');if(d&&!d.contains(e.target))d.open=false});
-      var n=Date.now();document.querySelectorAll('.ad').forEach(function(a){var s=a.dataset.start,e=a.dataset.end;if((s&&n<Date.parse(s))||(e&&n>Date.parse(e)))a.remove()});
-      var m=document.getElementById('ad-mid'),p=document.querySelectorAll('.prose>p')[1];if(m&&p)p.after(m);
-    })();
-  </script>
-</body>
-</html>
+      var n=Date.now();document.querySelectorAll('.ad').forEach(function(a){var s=a.dataset.start,e=a.dataset.end;if((s&&n
