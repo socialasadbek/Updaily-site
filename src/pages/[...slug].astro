@@ -265,6 +265,7 @@ setInterval(loadRates, 60000);
   const author = authors.find((x) => x.id === d.author);
   const url = `${site}${articleUrl(a)}`;
   const desc = d.seoDescription ?? d.summary ?? (a.body ?? '').replace(/\s+/g, ' ').slice(0, 160);
+  const yt = d.video?.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/)?.[1];
   const ld = {
     '@context': 'https://schema.org', '@type': 'NewsArticle', headline: d.title, description: desc, inLanguage: locale,
     datePublished: d.date.toISOString(), dateModified: (d.updated ?? d.date).toISOString(),
@@ -288,7 +289,14 @@ setInterval(loadRates, 60000);
             {d.updated && <span>{t(locale, 'updated')}: {fmtDate(d.updated)}</span>}
             {d.sponsored && <span class="badge">{t(locale, 'sponsored')}</span>}
           </div>
-          {d.cover && <img class="cover" src={d.cover} alt={d.coverAlt ?? d.title} width="1280" height="720" fetchpriority="high" />}
+          {yt ? (
+            <div class="yt">
+              <iframe src={`https://www.youtube.com/embed/${yt}`} title={d.title} loading="lazy" allowfullscreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+          ) : d.cover && (
+            <img class="cover" src={d.cover} alt={d.coverAlt ?? d.title} width="1280" height="720" fetchpriority="high" />
+          )}
           <Share url={url} title={d.title} locale={locale} />
           {(d.summary || d.keyPoints.length > 0) && (
             <div class="keybox">
@@ -444,6 +452,22 @@ setInterval(loadRates, 60000);
     max-height: 480px;
     object-fit: cover;
     border-radius: 10px;
+  }
+  .art-main .yt {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0 0 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+  }
+  .art-main .yt iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
   .art-main .prose img {
     max-width: 100%;
