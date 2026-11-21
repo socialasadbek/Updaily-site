@@ -277,7 +277,8 @@ setInterval(loadRates, 60000);
   const mail = `mailto:${contact.email}?subject=${encodeURIComponent('Xato: ' + d.title)}&body=${encodeURIComponent(url)}`;
   return (
     <Base locale={locale} title={d.seoTitle ?? d.title} description={desc} path={articleUrl(a)} alts={alternates(all, a)} image={d.cover} type="article" jsonLd={ld} cat={d.category}>
-      <article class="wrap narrow" data-pagefind-body>
+            <div class="art-layout">
+      <article class="wrap narrow art-main" data-pagefind-body>
         <div class="crumbs"><a href={L()}>{t(locale, 'home')}</a> / <a href={L(`/c/${d.category}`)}>{t(locale, d.category)}</a></div>
         <h1>{d.title}</h1>
         <div class="info">
@@ -319,6 +320,19 @@ setInterval(loadRates, 60000);
         <Ad slot="article-bottom" locale={locale} />
         {related.length > 0 && (<><h2 class="h2">{t(locale, d.category)}</h2>{related.map((x) => <Row a={x} locale={locale} />)}</>)}
       </article>
+      <aside class="art-side">
+        <h2 class="art-side-title">Tavsiya etamiz</h2>
+        {mine.filter((x) => x.id !== a.id).slice(0, 6).map((x) => (
+          <a class="art-rec" href={articleUrl(x)}>
+            {x.data.cover && <img src={x.data.cover} alt={x.data.coverAlt ?? x.data.title} width="120" height="75" loading="lazy" />}
+            <div>
+              <h3>{x.data.title}</h3>
+              <small>{t(locale, x.data.category)} · {fmtDate(x.data.date)}</small>
+            </div>
+          </a>
+        ))}
+      </aside>
+      </div>
     </Base>
   );
 })()}
