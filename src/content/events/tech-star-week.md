@@ -2,7 +2,7 @@
 title: Tech star week
 date: 2026-11-24
 time: '10:00'
-image: /uploads/39846.jpg
+image: /uploads/pasted-image-1795233931339.png
 summary: |-
   24–26-noyabr kunlari Toşkent şahrida "Humo Arena"da, Markaziy Osiyoda ilk bor "Techstars Startup Week" texnologiyalar festivali bölib ötadi.
 
