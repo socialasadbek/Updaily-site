@@ -222,3 +222,32 @@ header .g.r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
             </div>
             <a class="ic search-ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
           </div>
+                                                                    header { position: relative; }
+.spanel {
+  position: absolute;
+  top: 100%;
+  right: 16px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  z-index: 60;
+  background: var(--bg, #fff);
+  color: inherit;
+  border: 1px solid rgba(128,128,128,.3);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  margin-top: 8px;
+}
+.spanel[hidden] { display: none; }
+.spanel-inner { padding: 10px; }
+.spanel .pagefind-ui { width: 100%; }
+.spanel .pagefind-ui__search-input {
+  font-size: 14px;
+  padding: 8px 12px;
+  height: 36px;
+}
+.spanel .pagefind-ui__drawer {
+  max-height: 320px;
+  overflow-y: auto;
+  font-size: 13px;
+}
+.spanel .pagefind-ui__result-title { font-size: 14px; }
