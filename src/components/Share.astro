@@ -1,17 +1,44 @@
 ---
-import { settings } from '../lib/content';
-import { t, type Locale } from '../i18n/config';
-const { url, title, locale } = Astro.props as { url: string; title: string; locale: Locale };
-const pick = (type: string) => (settings.socials as any[]).find((s) => s.type === type)?.url;
-const tg = (settings.channels as any[]).find((c) => c.lang === locale)?.url ?? pick('telegram');
-const links = [
-  { name: 'Facebook', url: pick('facebook'), bg: '#1877f2' },
-  { name: 'LinkedIn', url: pick('linkedin'), bg: '#0a66c2' },
-  { name: 'Telegram', url: tg, bg: '#229ed9' },
-].filter((l) => l.url);
-const act = "(function(b){var d={title:b.dataset.title,url:b.dataset.url};if(navigator.share){navigator.share(d).catch(function(){})}else{navigator.clipboard.writeText(d.url);b.textContent='\u2713'}})(this)";
+const { url, title, locale } = Astro.props as { url: string; title: string; locale: string };
+const u = encodeURIComponent(url);
+const tt = encodeURIComponent(title);
+const share = [
+  { k: 'facebook', label: 'Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${u}`, cls: 'fb',
+    d: 'M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z' },
+  { k: 'linkedin', label: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${u}`, cls: 'li',
+    d: 'M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z' },
+  { k: 'telegram', label: 'Telegram', href: `https://t.me/share/url?url=${u}&text=${tt}`, cls: 'tg',
+    d: 'M9.04 15.3l-.14 3.9c.4 0 .58-.17.8-.38l1.92-1.84 3.98 2.92c.73.4 1.25.2 1.44-.67l2.6-12.2c.27-1.2-.43-1.67-1.13-1.38L3.7 10.6c-1.18.46-1.16 1.12-.2 1.42l4.1 1.28 9.5-6c.45-.27.86-.12.52.18z' },
+];
 ---
 <div class="share">
-  {links.map((l) => <a style={`background:${l.bg}`} href={l.url} target="_blank" rel="noopener">{l.name}</a>)}
-  <button style="background:#6b7280" type="button" data-url={url} data-title={title} onclick={act}>{t(locale, 'shareBtn')}</button>
+  {share.map((s) => (
+    <a class={s.cls} href={s.href} target="_blank" rel="noopener" aria-label={s.label} title={s.label}>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d={s.d} /></svg>
+    </a>
+  ))}
+  <button class="gen" type="button" aria-label={locale === 'uz' ? 'Ulashish' : 'Share'} title="Share"
+    data-u={url} data-t={title}
+    onclick="if(navigator.share){navigator.share({title:this.dataset.t,url:this.dataset.u})}else{navigator.clipboard&&navigator.clipboard.writeText(this.dataset.u);this.classList.add('done');setTimeout(()=>this.classList.remove('done'),1200)}">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+      <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" />
+    </svg>
+  </button>
 </div>
+
+<style>
+  .share { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+  .share a, .share button {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 0; color: #fff; cursor: pointer; text-decoration: none; padding: 0;
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  .share a:hover, .share button:hover { transform: translateY(-2px); opacity: .9; }
+  .share .fb { background: #1877f2; }
+  .share .li { background: #0a66c2; }
+  .share .tg { background: #229ed9; }
+  .share .gen { background: #6b7280; }
+  .share .gen.done { background: #16a34a; }
+</style>
