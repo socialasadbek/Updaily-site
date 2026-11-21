@@ -4,6 +4,7 @@ import Icon from '../components/Icon.astro';
 import { settings } from '../lib/content';
 import { locales, hreflang, langName, langCode, categories, localePath, t, type Locale } from '../i18n/config';
 import menu from '../data/menu.json';
+import banner from '../data/banner.json';
 
 const menuItems = menu.items.filter((i) => (categories as readonly string[]).includes(i.slug));
 
@@ -55,6 +56,13 @@ const year = new Date().getFullYear();
   <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 </head>
 <body>
+  <div class="top-banner">
+    {banner.type === 'video'
+      ? <video src={banner.src} autoplay muted loop playsinline></video>
+      : banner.link
+        ? <a href={banner.link} target="_blank" rel="noopener"><img src={banner.src} alt={banner.alt || 'Reklama'} /></a>
+        : <img src={banner.src} alt={banner.alt || 'Reklama'} />}
+  </div>
   <input type="checkbox" id="m" />
   <aside class="drawer">
     <div class="menu">
@@ -110,4 +118,9 @@ const year = new Date().getFullYear();
       var th=document.getElementById('th');
       th.addEventListener('click',function(){var r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}});
       document.addEventListener('click',function(e){var d=document.querySelector('.lg');if(d&&!d.contains(e.target))d.open=false});
-      var n=Date.now();document.querySelectorAll('.ad').forEach(function(a){var s=a.dataset.start,e=a.dataset.end;if((s&&n
+      var n=Date.now();document.querySelectorAll('.ad').forEach(function(a){var s=a.dataset.start,e=a.dataset.end;if((s&&n<Date.parse(s))||(e&&n>Date.parse(e)))a.remove()});
+      var m=document.getElementById('ad-mid'),p=document.querySelectorAll('.prose>p')[1];if(m&&p)p.after(m);
+    })();
+  </script>
+</body>
+</html>
