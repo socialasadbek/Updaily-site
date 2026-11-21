@@ -58,7 +58,7 @@ fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
   const { up } = await eventsFor(locale);
   return (
     <Base locale={locale} title="Updaily — Startup & Business Media" description={t(locale, 'latest')} path={L()} alts={allLocales('/')}>
-            <div class="hero-split">
+                  <div class="hero-split">
         <div class="hero-main">
           <div class="slider">
             {slides.map((a) => (
@@ -74,15 +74,16 @@ fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
           </div>
         </div>
         <aside class="hero-latest">
-          <h2 class="h2">{t(locale, 'latest')}</h2>
-          <ul>
-            {mine.slice(0, 6).map((a) => (
-              <li>
-                <a href={articleUrl(a)}>{a.data.title}</a>
+          <h2 class="hero-title">{t(locale, 'latest')}</h2>
+          {mine.slice(0, 3).map((a) => (
+            <a class="hero-item" href={articleUrl(a)}>
+              {a.data.cover && <img src={a.data.cover} alt={a.data.coverAlt ?? a.data.title} width="120" height="75" loading="lazy" />}
+              <div>
+                <h3>{a.data.title}</h3>
                 <small>{t(locale, a.data.category)} · {fmtDate(a.data.date)}</small>
-              </li>
-            ))}
-          </ul>
+              </div>
+            </a>
+          ))}
         </aside>
       </div>
       <main class="wrap">
@@ -310,3 +311,54 @@ fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
     </Base>
   );
 })()}
+<style>
+  .hero-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px;
+    align-items: start;
+  }
+  .hero-main { min-width: 0; }
+  .hero-main .slider img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-title {
+    margin: 0 0 12px;
+    font-size: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e11d2e;
+  }
+  .hero-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(128, 128, 128, .25);
+    color: inherit;
+    text-decoration: none;
+  }
+  .hero-item img {
+    width: 120px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .hero-item h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+  .hero-item:hover h3 { color: #e11d2e; }
+  .hero-item small { opacity: .6; font-size: 12px; }
+  @media (max-width: 768px) {
+    .hero-split { grid-template-columns: 1fr; }
+    .hero-main .slider img { height: auto; aspect-ratio: 16 / 9; }
+  }
+</style>
