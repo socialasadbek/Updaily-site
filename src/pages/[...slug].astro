@@ -5,6 +5,7 @@ import Row from '../components/Row.astro';
 import Share from '../components/Share.astro';
 import Ad from '../components/Ad.astro';
 import EventItem from '../components/EventItem.astro';
+import Icon from '../components/Icon.astro';
 import { locales, defaultLocale, categories, localePath, months, t, type Locale } from '../i18n/config';
 import { allArticles, byLocale, slugOf, alternates, readMin, fmtDate, articleUrl, eventsFor, getPage, PAGE_SLUGS, settings } from '../lib/content';
 
@@ -313,9 +314,15 @@ setInterval(loadRates, 60000);
             </a>
           ) : <div class="author"><span>Updaily</span></div>}
           <a class="rep" href={mail}>{t(locale, 'report')}</a>
-          {d.tags.length > 0 && (<><div class="lbl">{t(locale, 'tags')}</div><div class="tags">{d.tags.map((x) => <span>{x}</span>)}</div></>)}
+          {d.tags.length > 0 && (<><div class="lbl">{t(locale, 'tags')}</div><div class="tags art-tags">{d.tags.map((x) => <span>#{x}</span>)}</div></>)}
           <h2 class="h2">{t(locale, 'follow')}</h2>
-                    <Share url={url} title={d.title} locale={locale} />
+          <div class="fo-row">
+            {(settings as any).socials.map((s: any) => (
+              <a class={`fo fo-${s.type}`} href={s.url} target="_blank" rel="noopener" aria-label={s.type} title={s.type}>
+                <Icon name={s.type} />
+              </a>
+            ))}
+          </div>
           <Ad slot="article-bottom" locale={locale} />
         </article>
         <aside class="art-side">
@@ -442,6 +449,31 @@ setInterval(loadRates, 60000);
     max-width: 100%;
     height: auto;
   }
+  .art-main .art-tags span {
+    background: #eceef1;
+    color: #374151;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  [data-theme="dark"] .art-main .art-tags span {
+    background: #2a2f38;
+    color: #d1d5db;
+  }
+  .fo-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+  .fo {
+    width: 44px; height: 44px; min-width: 44px; flex: 0 0 44px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #fff; text-decoration: none;
+  }
+  .fo:hover { opacity: .9; }
+  .fo-telegram { background: #229ed9; }
+  .fo-facebook { background: #1877f2; }
+  .fo-linkedin { background: #0a66c2; }
+  .fo-instagram { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+  .fo-youtube { background: #ff0000; }
+  .fo-x { background: #111827; }
   .art-side { position: sticky; top: 90px; }
   .art-side-title {
     font-size: 22px;
