@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "slug": "news", "title": { "uz": "Yangiliklar", "cyrl": "Янгиликлар", "ru": "Новости", "en": "News" } },
+    { "slug": "articles", "title": { "uz": "Maqolalar", "cyrl": "Мақолалар", "ru": "Статьи", "en": "Articles" } },
+    { "slug": "startups", "title": { "uz": "Startaplar", "cyrl": "Стартаплар", "ru": "Стартапы", "en": "Startups" } },
+    { "slug": "business", "title": { "uz": "Biznes", "cyrl": "Бизнес", "ru": "Бизнес", "en": "Business" } },
+    { "slug": "investments", "title": { "uz": "Investitsiyalar", "cyrl": "Инвестициялар", "ru": "Инвестиции", "en": "Investments" } },
+    { "slug": "technology", "title": { "uz": "Texnologiya", "cyrl": "Технология", "ru": "Технологии", "en": "Technology" } },
+    { "slug": "research", "title": { "uz": "Tadqiqotlar", "cyrl": "Тадқиқотлар", "ru": "Исследования", "en": "Research" } },
+    { "slug": "interviews", "title": { "uz": "Intervyular", "cyrl": "Интервью", "ru": "Интервью", "en": "Interviews" } }
+  ]
+}
