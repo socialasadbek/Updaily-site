@@ -305,3 +305,61 @@ header .g.r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
     aspect-ratio: 16 / 5;
   }
 }
+                                                                    /* Menyu tugmasi: kompyuterda yashirin */
+header .menu-mob { display: none; }
+
+/* Mobil ko'rinish */
+@media (max-width: 768px) {
+  header .bar {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px 12px;
+    padding: 10px 14px !important;
+    max-width: none !important;
+  }
+  header .logo { grid-column: 1; grid-row: 1; }
+  header .logo img { width: 110px !important; height: auto !important; }
+  header .g.r {
+    grid-column: 2; grid-row: 1;
+    justify-self: end;
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+  }
+  header .menu-desk { display: none !important; }
+  header .menu-mob {
+    display: inline-flex !important;
+    align-items: center; justify-content: center;
+    flex: 0 0 auto;
+    width: 38px; height: 34px;
+    border: 1px solid rgba(128,128,128,.35);
+    border-radius: 999px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  header .cats {
+    grid-column: 1 / -1; grid-row: 2;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    padding: 2px 0 4px;
+  }
+  header .cats::-webkit-scrollbar { display: none; }
+  header .cats a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 6px 14px;
+    border: 1px solid rgba(128,128,128,.35);
+    border-radius: 999px;
+    font-size: 14px;
+    text-decoration: none;
+    color: inherit;
+  }
+  header .cats a.on { background: #e11d2e; border-color: #e11d2e; color: #fff; }
+}
