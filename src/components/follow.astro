@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro';
+const { socials = [] } = Astro.props as { socials?: { type: string; url: string }[] };
+const names: Record<string, string> = { telegram: 'Telegram', facebook: 'Facebook', instagram: 'Instagram', youtube: 'YouTube', linkedin: 'LinkedIn', x: 'X' };
+---
+<div class="follow">
+  {socials.map((s) => (
+    <a class={`fo fo-${s.type}`} href={s.url} target="_blank" rel="noopener" aria-label={names[s.type] ?? s.type} title={names[s.type] ?? s.type}>
+      <Icon name={s.type} />
+    </a>
+  ))}
+</div>
+
+<style>
+  .follow { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+  .follow .fo {
+    width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+    flex: 0 0 44px; aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #fff; text-decoration: none; padding: 0;
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  .follow .fo:hover { transform: translateY(-2px); opacity: .9; }
+  .follow .fo-telegram { background: #229ed9; }
+  .follow .fo-facebook { background: #1877f2; }
+  .follow .fo-linkedin { background: #0a66c2; }
+  .follow .fo-instagram { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+  .follow .fo-youtube { background: #ff0000; }
+  .follow .fo-x { background: #111827; }
+</style>
