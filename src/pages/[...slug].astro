@@ -264,7 +264,6 @@ setInterval(loadRates, 60000);
   const author = authors.find((x) => x.id === d.author);
   const url = `${site}${articleUrl(a)}`;
   const desc = d.seoDescription ?? d.summary ?? (a.body ?? '').replace(/\s+/g, ' ').slice(0, 160);
-  const related = mine.filter((x) => x.id !== a.id && x.data.category === d.category).slice(0, 4);
   const ld = {
     '@context': 'https://schema.org', '@type': 'NewsArticle', headline: d.title, description: desc, inLanguage: locale,
     datePublished: d.date.toISOString(), dateModified: (d.updated ?? d.date).toISOString(),
@@ -277,61 +276,60 @@ setInterval(loadRates, 60000);
   const mail = `mailto:${contact.email}?subject=${encodeURIComponent('Xato: ' + d.title)}&body=${encodeURIComponent(url)}`;
   return (
     <Base locale={locale} title={d.seoTitle ?? d.title} description={desc} path={articleUrl(a)} alts={alternates(all, a)} image={d.cover} type="article" jsonLd={ld} cat={d.category}>
-            <div class="art-layout">
-      <article class="wrap narrow art-main" data-pagefind-body>
-        <div class="crumbs"><a href={L()}>{t(locale, 'home')}</a> / <a href={L(`/c/${d.category}`)}>{t(locale, d.category)}</a></div>
-        <h1>{d.title}</h1>
-        <div class="info">
-          <span class="cat">{t(locale, d.category)}</span>
-          <time datetime={d.date.toISOString()}>{fmtDate(d.date)}</time>
-          <span>{readMin(a.body)} {t(locale, 'minRead')}</span>
-          {d.updated && <span>{t(locale, 'updated')}: {fmtDate(d.updated)}</span>}
-          {d.sponsored && <span class="badge">{t(locale, 'sponsored')}</span>}
-        </div>
-        {d.cover && <img class="cover" src={d.cover} alt={d.coverAlt ?? d.title} width="1280" height="720" fetchpriority="high" />}
-        <Share url={url} title={d.title} locale={locale} />
-        {(d.summary || d.keyPoints.length > 0) && (
-          <div class="keybox">
-            <b>{t(locale, 'summary')}</b>
-            {d.summary && <div>{d.summary}</div>}
-            {d.keyPoints.length > 0 && <ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul>}
+      <div class="art-layout">
+        <article class="art-main" data-pagefind-body>
+          <div class="crumbs"><a href={L()}>{t(locale, 'home')}</a> / <a href={L(`/c/${d.category}`)}>{t(locale, d.category)}</a></div>
+          <h1>{d.title}</h1>
+          <div class="info">
+            <span class="cat">{t(locale, d.category)}</span>
+            <time datetime={d.date.toISOString()}>{fmtDate(d.date)}</time>
+            <span>{readMin(a.body)} {t(locale, 'minRead')}</span>
+            {d.updated && <span>{t(locale, 'updated')}: {fmtDate(d.updated)}</span>}
+            {d.sponsored && <span class="badge">{t(locale, 'sponsored')}</span>}
           </div>
-        )}
-        <div class="prose"><Content /></div>
-        <Ad slot="article-middle" locale={locale} id="ad-mid" />
-        {d.sources.length > 0 && (
-          <>
-            <div class="lbl">{t(locale, 'sources')}</div>
-            <ul class="src">{d.sources.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.title}</a></li>)}</ul>
-          </>
-        )}
-        <hr />
-        <div class="lbl">{t(locale, 'author')}</div>
-        {author ? (
-          <a class="author" href={L(`/author/${author.id}`)}>
-            {author.data.photo && <img src={author.data.photo} alt={author.data.name} width="48" height="48" />}
-            <span>{author.data.name}{author.data.role && <small>{author.data.role}</small>}</span>
-          </a>
-        ) : <div class="author"><span>Updaily</span></div>}
-        <a class="rep" href={mail}>{t(locale, 'report')}</a>
-        {d.tags.length > 0 && (<><div class="lbl">{t(locale, 'tags')}</div><div class="tags">{d.tags.map((x) => <span>{x}</span>)}</div></>)}
-        <h2 class="h2">{t(locale, 'follow')}</h2>
-        <Share url={url} title={d.title} locale={locale} />
-        <Ad slot="article-bottom" locale={locale} />
-        {related.length > 0 && (<><h2 class="h2">{t(locale, d.category)}</h2>{related.map((x) => <Row a={x} locale={locale} />)}</>)}
-      </article>
-      <aside class="art-side">
-        <h2 class="art-side-title">Tavsiya etamiz</h2>
-        {mine.filter((x) => x.id !== a.id).slice(0, 6).map((x) => (
-          <a class="art-rec" href={articleUrl(x)}>
-            {x.data.cover && <img src={x.data.cover} alt={x.data.coverAlt ?? x.data.title} width="120" height="75" loading="lazy" />}
-            <div>
-              <h3>{x.data.title}</h3>
-              <small>{t(locale, x.data.category)} · {fmtDate(x.data.date)}</small>
+          {d.cover && <img class="cover" src={d.cover} alt={d.coverAlt ?? d.title} width="1280" height="720" fetchpriority="high" />}
+          <Share url={url} title={d.title} locale={locale} />
+          {(d.summary || d.keyPoints.length > 0) && (
+            <div class="keybox">
+              <b>{t(locale, 'summary')}</b>
+              {d.summary && <div>{d.summary}</div>}
+              {d.keyPoints.length > 0 && <ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul>}
             </div>
-          </a>
-        ))}
-      </aside>
+          )}
+          <div class="prose"><Content /></div>
+          <Ad slot="article-middle" locale={locale} id="ad-mid" />
+          {d.sources.length > 0 && (
+            <>
+              <div class="lbl">{t(locale, 'sources')}</div>
+              <ul class="src">{d.sources.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.title}</a></li>)}</ul>
+            </>
+          )}
+          <hr />
+          <div class="lbl">{t(locale, 'author')}</div>
+          {author ? (
+            <a class="author" href={L(`/author/${author.id}`)}>
+              {author.data.photo && <img src={author.data.photo} alt={author.data.name} width="48" height="48" />}
+              <span>{author.data.name}{author.data.role && <small>{author.data.role}</small>}</span>
+            </a>
+          ) : <div class="author"><span>Updaily</span></div>}
+          <a class="rep" href={mail}>{t(locale, 'report')}</a>
+          {d.tags.length > 0 && (<><div class="lbl">{t(locale, 'tags')}</div><div class="tags">{d.tags.map((x) => <span>{x}</span>)}</div></>)}
+          <h2 class="h2">{t(locale, 'follow')}</h2>
+          <Share url={url} title={d.title} locale={locale} />
+          <Ad slot="article-bottom" locale={locale} />
+        </article>
+        <aside class="art-side">
+          <h2 class="art-side-title">Tavsiya etamiz</h2>
+          {mine.filter((x) => x.id !== a.id).slice(0, 6).map((x) => (
+            <a class="art-rec" href={articleUrl(x)}>
+              {x.data.cover && <img src={x.data.cover} alt={x.data.coverAlt ?? x.data.title} width="120" height="75" loading="lazy" />}
+              <div>
+                <h3>{x.data.title}</h3>
+                <small>{t(locale, x.data.category)} · {fmtDate(x.data.date)}</small>
+              </div>
+            </a>
+          ))}
+        </aside>
       </div>
     </Base>
   );
@@ -411,5 +409,50 @@ setInterval(loadRates, 60000);
   @media (max-width: 768px) {
     .hero-split { grid-template-columns: 1fr; }
     .hero-main .slider img { height: auto; aspect-ratio: 16 / 9; }
+  }
+
+  .art-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    align-items: start;
+  }
+  .art-main { min-width: 0; }
+  .art-side { position: sticky; top: 90px; }
+  .art-side-title {
+    font-size: 18px;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e11d2e;
+  }
+  .art-rec {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(128, 128, 128, .25);
+    color: inherit;
+    text-decoration: none;
+  }
+  .art-rec img {
+    width: 110px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .art-rec h3 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+  .art-rec:hover h3 { color: #e11d2e; }
+  .art-rec small { opacity: .6; font-size: 11px; }
+  @media (max-width: 900px) {
+    .art-layout { grid-template-columns: 1fr; }
+    .art-side { position: static; }
   }
 </style>
