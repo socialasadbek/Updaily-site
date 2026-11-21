@@ -209,3 +209,16 @@ header .cats a {
 }
 header .cats a.on { background: #e11d2e; color: #fff; }
 header .g.r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+          <div class="tools">
+            <div class="rates-card">
+              <div class="rates-head">
+                <span class="rates-badge">🏦</span>
+                <div>
+                  <b>Markaziy bank kursi</b>
+                  <small>Rasmiy kurslar</small>
+                </div>
+              </div>
+              <a class="rates" id="rates" href={L('/rates')} aria-label={t(locale, 'rates')}></a>
+            </div>
+            <a class="ic search-ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
+          </div>
