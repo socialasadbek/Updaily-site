@@ -363,3 +363,41 @@ header .menu-mob { display: none; }
   }
   header .cats a.on { background: #e11d2e; border-color: #e11d2e; color: #fff; }
 }
+/* Sahifa butun ekran bo'ylab siljimasligi uchun */
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@media (max-width: 768px) {
+  header {
+    max-width: 100vw;
+    overflow: hidden;
+  }
+  header .bar {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    min-width: 0;
+    max-width: 100% !important;
+  }
+  header .g.r {
+    min-width: 0;
+  }
+  header .cats {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .ticker {
+    max-width: 100vw;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-split,
+  .art-layout,
+  main.wrap {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
