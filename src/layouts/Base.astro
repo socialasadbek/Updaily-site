@@ -78,10 +78,11 @@ const year = new Date().getFullYear();
     <div class="small">{legal.map((i) => <a href={i.h}>{i.l}</a>)}</div>
   </aside>
   <label class="scrim" for="m"></label>
-    <header>
+      <header>
     <div class="bar">
       <a class="logo" href={L()} aria-label="Updaily"><img src="/logo.png" alt="Updaily" width="120" height="30" /></a>
       <nav class="cats">
+        <a class={path === L() ? 'on' : ''} href={L()}>{t(locale, 'home')}</a>
         {menuItems.map((item) => (
           <a class={item.slug === cat ? 'on' : ''} href={L(`/c/${item.slug}`)}>
             {item.title[locale] || t(locale, item.slug)}
@@ -93,8 +94,10 @@ const year = new Date().getFullYear();
           <summary aria-label={t(locale, 'lang')}><Icon name="globe" /> {langCode[locale]}</summary>
           <div class="lgm">{locales.map((l) => <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langName[l]}</a>)}</div>
         </details>
-        <a class="ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
-        <button class="ic" id="th" type="button" aria-label={t(locale, 'theme')}>◐</button>
+        <a class="ic search-ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
+        <button class="theme-switch" id="th" type="button" aria-label={t(locale, 'theme')}>
+          <span class="sun">☀</span><span class="moon">☾</span>
+        </button>
         <label class="ic" for="m" aria-label="Menu">☰</label>
       </div>
     </div>
