@@ -102,11 +102,6 @@ const year = new Date().getFullYear();
       </div>
     </div>
   </header>
-  <div class="spanel" id="spanel" hidden>
-    <div class="spanel-inner">
-      <div id="sui"></div>
-    </div>
-  </div>
   <slot />
   <footer>
     <div class="soc">{S.socials.map((s: any) => <a href={s.url} target="_blank" rel="noopener" aria-label={names[s.type] ?? s.type}><Icon name={s.type} /></a>)}</div>
