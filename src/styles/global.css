@@ -308,16 +308,8 @@ header .g.r { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
                                                                     /* Menyu tugmasi: kompyuterda yashirin */
 header .menu-mob { display: none; }
 
-/* Mobil ko'rinish */
-@media (max-width: 768px) {
-  header .bar {
-    display: grid !important;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 8px 12px;
-    padding: 10px 14px !important;
-    max-width: none !important;
-  }
+
+                                                              
   header .logo { grid-column: 1; grid-row: 1; }
   header .logo img { width: 110px !important; height: auto !important; }
   header .g.r {
@@ -401,3 +393,35 @@ html, body {
     box-sizing: border-box;
   }
 }
+/* Bo'limlar qatori: faqat o'zi suriladi */
+@media (max-width: 768px) {
+  header nav.cats {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scrollbar-width: none;
+    padding: 4px 12px 8px !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  header nav.cats::-webkit-scrollbar { display: none; }
+  header nav.cats > * {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+  header .bar,
+  header {
+    overflow: visible !important;
+  }
+} 
