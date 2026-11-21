@@ -6,7 +6,7 @@ updated: 2026-11-21T18:50:00Z
 author: asadbek-botirov
 category: news
 cover: ''
-video: https://youtube.com/shorts/KOWyQfisUJ4?si=GOAuVmzr5rUSGGzS
+video: https://youtu.be/2TIHQ2okjGQ?si=y5Cm_5u541vQXOY4
 coverAlt: ''
 summary: ''
 keyPoints: []
