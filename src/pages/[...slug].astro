@@ -70,7 +70,7 @@ setInterval(loadRates, 60000);
         </div>
       </div>
 
-      <div class="hero-split">
+            <div class="hero-split">
         <div class="hero-main">
           <div class="slider">
             {slides.map((a) => (
@@ -80,6 +80,24 @@ setInterval(loadRates, 60000);
               </a>
             ))}
           </div>
+          <div class="tools">
+            <a class="rates" id="rates" href={L('/rates')} aria-label={t(locale, 'rates')}></a>
+            <a class="ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
+          </div>
+        </div>
+        <aside class="hero-latest">
+          <h2 class="hero-title">{t(locale, 'latest')}</h2>
+          {mine.slice(0, 3).map((a) => (
+            <a class="hero-item" href={articleUrl(a)}>
+              {a.data.cover && <img src={a.data.cover} alt={a.data.coverAlt ?? a.data.title} width="120" height="75" loading="lazy" />}
+              <div>
+                <h3>{a.data.title}</h3>
+                <small>{t(locale, a.data.category)} · {fmtDate(a.data.date)}</small>
+              </div>
+            </a>
+          ))}
+        </aside>
+      </div>
                   <div class="tools">
             <div class="rates-card">
               <div class="rates-head">
