@@ -78,10 +78,20 @@ const year = new Date().getFullYear();
     <div class="small">{legal.map((i) => <a href={i.h}>{i.l}</a>)}</div>
   </aside>
   <label class="scrim" for="m"></label>
-      <header>
+        <header>
     <div class="bar">
       <a class="logo" href={L()} aria-label="Updaily"><img src="/logo.png" alt="Updaily" width="120" height="30" /></a>
+      <div class="g r">
+        <details class="lg">
+          <summary aria-label={t(locale, 'lang')}><Icon name="globe" /> {langCode[locale]}</summary>
+          <div class="lgm">{locales.map((l) => <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langName[l]}</a>)}</div>
+        </details>
+        <button class="ic search-ic" id="sbtn" type="button" aria-label={t(locale, 'search')}>⌕</button>
+        <button class="ic" id="th" type="button" aria-label={t(locale, 'theme')}>◐</button>
+        <label class="ic menu-desk" for="m" aria-label="Menu">☰</label>
+      </div>
       <nav class="cats">
+        <label class="ic menu-mob" for="m" aria-label="Menu">☰</label>
         <a class={path === L() ? 'on' : ''} href={L()}>{t(locale, 'home')}</a>
         {menuItems.map((item) => (
           <a class={item.slug === cat ? 'on' : ''} href={L(`/c/${item.slug}`)}>
@@ -89,16 +99,10 @@ const year = new Date().getFullYear();
           </a>
         ))}
       </nav>
-      <div class="g r">
-        <details class="lg">
-          <summary aria-label={t(locale, 'lang')}><Icon name="globe" /> {langCode[locale]}</summary>
-          <div class="lgm">{locales.map((l) => <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langName[l]}</a>)}</div>
-        </details>
-       <button class="ic search-ic" id="sbtn" type="button" aria-label={t(locale, 'search')}>⌕</button>
-        <button class="theme-switch" id="th" type="button" aria-label={t(locale, 'theme')}>
-          <span class="sun">☀</span><span class="moon">☾</span>
-        </button>
-        <label class="ic" for="m" aria-label="Menu">☰</label>
+      <div class="spanel" id="spanel" hidden>
+        <div class="spanel-inner">
+          <div id="sui"></div>
+        </div>
       </div>
     </div>
   </header>
