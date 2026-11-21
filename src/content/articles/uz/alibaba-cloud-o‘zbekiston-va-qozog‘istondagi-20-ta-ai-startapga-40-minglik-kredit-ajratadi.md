@@ -1,8 +1,8 @@
 ---
 translationKey: Ai-kredit
 title: Alibaba Cloud O‘zbekiston va Qozog‘istondagi 20 ta AI-startapga $40 minglik kredit ajratadi
-date: 2026-11-21T10:48:00Z
-updated: ''
+date: 2026-11-21T22:56:00Z
+updated: 2026-11-21T17:56:00Z
 author: asadbek-botirov
 category: startups
 cover: /uploads/40002.png
