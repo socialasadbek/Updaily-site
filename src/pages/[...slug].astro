@@ -58,17 +58,32 @@ fetch('/api/rates').then(function(r){return r.json()}).then(function(d){
   const { up } = await eventsFor(locale);
   return (
     <Base locale={locale} title="Updaily — Startup & Business Media" description={t(locale, 'latest')} path={L()} alts={allLocales('/')}>
-      <div class="slider">
-        {slides.map((a) => (
-          <a class="slide" href={articleUrl(a)}>
-            {a.data.cover && <img src={a.data.cover} alt={a.data.coverAlt ?? a.data.title} width="1280" height="800" />}
-            <h2>{a.data.title}</h2>
-          </a>
-        ))}
-      </div>
-      <div class="tools">
-        <a class="rates" id="rates" href={L('/rates')} aria-label={t(locale, 'rates')}></a>
-        <a class="ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
+            <div class="hero-split">
+        <div class="hero-main">
+          <div class="slider">
+            {slides.map((a) => (
+              <a class="slide" href={articleUrl(a)}>
+                {a.data.cover && <img src={a.data.cover} alt={a.data.coverAlt ?? a.data.title} width="1280" height="800" />}
+                <h2>{a.data.title}</h2>
+              </a>
+            ))}
+          </div>
+          <div class="tools">
+            <a class="rates" id="rates" href={L('/rates')} aria-label={t(locale, 'rates')}></a>
+            <a class="ic" href={L('/search')} aria-label={t(locale, 'search')}>⌕</a>
+          </div>
+        </div>
+        <aside class="hero-latest">
+          <h2 class="h2">{t(locale, 'latest')}</h2>
+          <ul>
+            {mine.slice(0, 6).map((a) => (
+              <li>
+                <a href={articleUrl(a)}>{a.data.title}</a>
+                <small>{t(locale, a.data.category)} · {fmtDate(a.data.date)}</small>
+              </li>
+            ))}
+          </ul>
+        </aside>
       </div>
       <main class="wrap">
         <Ad slot="home-top" locale={locale} />
