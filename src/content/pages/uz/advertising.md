@@ -1,17 +1,18 @@
 ---
 title: Reklama
-description: Updaily saytida reklama va homiylik materiallarini joylashtirish.
+description: Updaily saytida reklama va homiylik materiallarini joylaştiriş.
 ---
-Updaily o'zbekistonlik startup va biznes auditoriyasiga yetib borish imkonini beradi.
+
+Updaily Özbekistonlik startup va biznes auditoriyasiga yetib boriş imkonini beradi.
 
 ## Formatlar
 
-- Bosh sahifadagi banner
-- Maqola ichidagi va maqola oxiridagi banner
+- Boş sahifadagi banner
+- Maqola içidagi va maqola oxiridagi banner
 - Homiylik materiali (aniq "Homiylik materiali" belgisi bilan)
 
-Barcha reklama "Reklama" belgisi bilan chiqadi va tahririy materialdan ajralib turadi.
+Barça reklama "Reklama" belgisi bilan çiqadi va tahririy materialdan ajralib turadi.
 
 ## Aloqa
 
-Narxlar va shartlar uchun yozing: [Updaily.uz@gmail.com](mailto:Updaily.uz@gmail.com) yoki Telegram [@updailysupport](https://t.me/updailysupport).
+Narxlar va şartlar uchun yozing: [Updaily.uz@gmail.com](mailto:Updaily.uz@gmail.com) yoki Telegram [@updailysupport](https://t.me/updailysupport).
