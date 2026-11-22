@@ -16,17 +16,17 @@ export const months: Record<Locale, string[]> = {
 };
 
 export const ui: Record<Locale, Record<string, string>> = {
-  uz: {
+    uz: {
     news: 'Yangiliklar', articles: 'Maqolalar', startups: 'Startaplar', business: 'Biznes', investments: 'Investitsiyalar',
     technology: 'Texnologiya', research: 'Tadqiqotlar', interviews: 'Intervyular',
-    latest: "So'nggi yangiliklar", search: 'Qidirish', summary: 'Qisqacha', sources: 'Manbalar',
-    author: 'Maqola muallifi', tags: 'Teglar', share: "Do'stlaringiz bilan ulashing", follow: "Updaily'ga obuna bo'ling", shareBtn: 'Ulashish',
-    ad: 'Reklama', sponsored: 'Homiylik materiali', minRead: 'daqiqa o‘qish', updated: 'Yangilandi',
-    admin: 'Admin panel', channels: 'Kanallar', notFound: 'Sahifa topilmadi', home: 'Bosh sahifa',
-    rates: 'Valyutalar kursi', events: 'Tadbirlar', calendar: 'Tadbirlar taqvimi', upcoming: 'Yaqin tadbirlar', past: "O'tgan tadbirlar",
-    about: 'Biz haqimizda', advertising: 'Reklama', contact: "Bog'lanish", policy: 'Tahririy siyosat', privacy: 'Maxfiylik siyosati',
-    terms: 'Foydalanish shartlari', report: 'Xatoni xabar qiling', more: "Ko'proq yangiliklarni yuklash", editorIn: 'Bosh muharrir',
-    lang: 'Til', theme: 'Tungi rejim', team: 'Jamoa', rateNote: 'Markaziy bank kursi', articlesBy: 'Muallif maqolalari', expertise: 'Yo‘nalishlar', where: 'Manzil', openMap: 'Xaritada ochish', register: "Batafsil va ro'yxatdan o'tish",
+    latest: 'Sönggi yangiliklar', search: 'Qidiriş', summary: 'Qisqacha', sources: 'Manbalar',
+    author: 'Maqola muallifi', tags: 'Teglar', share: 'Döstlaringiz bilan ulaşing', follow: "Updaily'ga obuna böling", shareBtn: 'Ulaşiş',
+    ad: 'Reklama', sponsored: 'Homiylik materiali', minRead: 'daqiqa öqiş', updated: 'Yangilandi',
+    admin: 'Admin panel', channels: 'Kanallar', notFound: 'Sahifa topilmadi', home: 'Asosiy sahifa',
+    rates: 'Valyutalar kursi', events: 'Tadbirlar', calendar: 'Tadbirlar taqvimi', upcoming: 'Yaqin tadbirlar', past: 'Ötgan tadbirlar',
+    about: 'Biz haqimizda', advertising: 'Reklama', contact: 'Boğlanish', policy: 'Tahririy siyosat', privacy: 'Maxfiylik siyosati',
+    terms: 'Foydalaniş şartlari', report: 'Xatoni xabar qiling', more: 'Köproq yangiliklarni yuklaş', editorIn: 'Boş muharrir',
+    lang: 'Til', theme: 'Tungi rejim', team: 'Jamoa', rateNote: 'Markaziy bank kursi', articlesBy: 'Muallif maqolalari', expertise: 'Yönalişlar', where: 'Manzil', openMap: 'Xaritada ochiş', register: 'Batafsil va röyxatdan ötiş',
   },
   cyrl: {
     news: 'Янгиликлар', articles: 'Мақолалар', startups: 'Стартаплар', business: 'Бизнес', investments: 'Инвестициялар',
