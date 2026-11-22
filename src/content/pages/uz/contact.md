@@ -1,9 +1,9 @@
 ---
 title: Boğlanish
-description: "Biz bilan bog'laning: telefon va email"
+description: 'Biz bilan boğlaning: telefon va email'
 ---
 
-Savol, taklif, hamkorlik yoki xato haqida xabar berish uchun:
+Savol, taklif, hamkorlik yoki xato haqida xabar beriş uchun:
 
 - **Email:** [Updaily.uz@gmail.com](mailto:Updaily.uz@gmail.com)
 - **Telegram:** [@updailysupport](https://t.me/updailysupport)
