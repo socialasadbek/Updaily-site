@@ -2,7 +2,7 @@
 translationKey: Ai-gpt
 title: Yangiliklar 🤖 ÇatGPT endi foydalanuvçilar nomidan xaridlarni amalga oşira oladi
 date: 2026-11-15T10:09:00Z
-updated: ''
+updated: 2026-11-22T17:12:00Z
 author: asadbek-botirov
 category: news
 cover: /uploads/39790.jpg
