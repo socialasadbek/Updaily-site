@@ -1,24 +1,24 @@
 ---
-title: Foydalanish shartlari
-description: Updaily.uz saytidagi materiallardan foydalanish qoidalari.
+title: Foydalaniş şartlari
+description: Updaily.uz saytidagi materiallardan foydalaniş qoidalari.
 ---
 
-Saytdan foydalanish orqali quyidagi shartlarga rozilik bildirasiz.
+Saytdan foydalaniş orqali quyidagi şartlarga rozilik bildirasiz.
 
-## Materiallardan foydalanish
+## Materiallardan foydalaniş
 
-- Updaily materiallarini shaxsiy maqsadda öqish va ulashish mumkin.
-- Matn va rasmlarni boshqa saytda, ijtimoiy tarmoqda yoki OAVda e'lon qilganda manba sifatida Updaily va maqolaga faol havola körsatilishi shart.
-- Materiallarni töliq nusxalash va tijorat maqsadida ishlatish uchun oldindan yozma ruxsat kerak.
+- Updaily materiallarini şaxsiy maqsadda öqiş va ulaşiş mumkin.
+- Matn va rasmlarni boşqa saytda, ijtimoiy tarmoqda yoki OAVda e'lon qilganda manba sifatida Updaily va maqolaga faol havola körsatilişi şart.
+- Materiallarni töliq nusxalaş va tijorat maqsadida işlatiş uçun oldindan yozma ruxsat kerak.
 
 ## Ma'lumotlar aniqligi
 
-Ma'lumotlarni töğri yetkazishga harakat qilamiz, lekin ular moliyaviy, huquqiy yoki investitsiya maslahati emas. Qaror qabul qilishdan oldin mustaqil tekshiring.
+Ma'lumotlarni töğri yetkazişga harakat qilamiz, lekin ular moliyaviy, huquqiy yoki investitsiya maslahati emas. Qaror qabul qilişdan oldin mustaqil tekşiring.
 
-## Uchinchi tomon
+## Uçinçi tomon
 
-Saytdagi reklama va boshqa saytlarga havolalar mazmuni uchun ularning egalari javobgar.
+Saytdagi reklama va boşqa saytlarga havolalar mazmuni uchun ularning egalari javobgar.
 
-## Özgarishlar
+## Özgarişlar
 
-Shartlar vaqti-vaqti bilan yangilanishi mumkin. Savollar uchun: [Updaily.uz@gmail.com](mailto:Updaily.uz@gmail.com).
+Şartlar vaqti-vaqti bilan yangilanişi mumkin. Savollar uchun: [Updaily.uz@gmail.com](mailto:Updaily.uz@gmail.com).
