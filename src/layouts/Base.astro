@@ -25,9 +25,6 @@ const ld = [
   ...(jsonLd ? [jsonLd] : []),
 ];
 const names: Record<string, string> = { telegram: 'Telegram', facebook: 'Facebook', instagram: 'Instagram', youtube: 'YouTube', linkedin: 'LinkedIn', x: 'X' };
-const left = [{ l: t(locale, 'news'), h: L('/c/news') }, { l: t(locale, 'articles'), h: L('/c/articles') }, { l: t(locale, 'rates'), h: L('/rates') }];
-const right = ['startups', 'business', 'investments', 'technology', 'research', 'interviews'].map((k) => ({ l: t(locale, k), h: L(`/c/${k}`) }))
-  .concat([{ l: t(locale, 'events'), h: L('/events') }]);
 const info = [{ l: t(locale, 'advertising'), h: L('/advertising') }, { l: t(locale, 'contact'), h: L('/contact') }, { l: t(locale, 'about'), h: L('/about') }];
 const legal = [{ l: t(locale, 'policy'), h: L('/editorial-policy') }, { l: t(locale, 'privacy'), h: L('/privacy') }, { l: t(locale, 'terms'), h: L('/terms') }];
 const year = new Date().getFullYear();
@@ -64,7 +61,7 @@ const year = new Date().getFullYear();
         : <img src={banner.src} alt={banner.alt || 'Reklama'} />}
   </div>
   <input type="checkbox" id="m" />
-    <aside class="drawer">
+  <aside class="drawer">
     <div class="dr-head">
       <span class="dr-title">Sozlamalar</span>
       <label class="dr-close" for="m" aria-label="Yopish">✕</label>
@@ -86,15 +83,25 @@ const year = new Date().getFullYear();
         <span class="dr-ic">📅</span>
         <span class="dr-txt">{t(locale, 'events')}</span>
       </a>
-      <div class="dr-row dr-static">
-        <span class="dr-ic">🌐</span>
-        <span class="dr-txt">{t(locale, 'lang')}</span>
-        <span class="dr-val">{langName[locale]}</span>
-      </div>
+      <details class="dr-row dr-lang">
+        <summary>
+          <span class="dr-ic">🌐</span>
+          <span class="dr-txt">{t(locale, 'lang')}</span>
+          <span class="dr-val">{langName[locale]}</span>
+        </summary>
+        <div class="dr-langlist">
+          {locales.map((l) => (
+            <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langName[l]}</a>
+          ))}
+        </div>
+      </details>
       <div class="dr-row dr-static">
         <span class="dr-ic">🌙</span>
         <span class="dr-txt">{t(locale, 'theme')}</span>
-        <button class="dr-btn" id="th2" type="button">◐</button>
+        <label class="dr-switch">
+          <input type="checkbox" id="th2" />
+          <span class="dr-slider"></span>
+        </label>
       </div>
     </div>
     <div class="dr-card">
@@ -128,7 +135,7 @@ const year = new Date().getFullYear();
     <div class="small">{legal.map((i) => <a href={i.h}>{i.l}</a>)}</div>
   </aside>
   <label class="scrim" for="m"></label>
-        <header>
+  <header>
     <div class="bar">
       <a class="logo" href={L()} aria-label="Updaily"><img src="/logo.png" alt="Updaily" width="120" height="30" /></a>
       <div class="g r">
@@ -168,13 +175,24 @@ const year = new Date().getFullYear();
     </p>
     <p>{c.phones.map((p: string, i: number) => <><a class="ul" href={`tel:${p.replace(/[^\d+]/g, '')}`}>{p}</a>{i < c.phones.length - 1 && ' · '}</>)}</p>
   </footer>
-    <script is:inline>
+  <script is:inline>
 (function(){
+  var r=document.documentElement;
+
   var th=document.getElementById('th');
   if(th)th.addEventListener('click',function(){
-    var r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark';
+    var n=r.dataset.theme==='dark'?'light':'dark';
     r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}
   });
+
+  var th2=document.getElementById('th2');
+  if(th2){
+    th2.checked=r.dataset.theme==='dark';
+    th2.addEventListener('change',function(){
+      var n=th2.checked?'dark':'light';
+      r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}
+    });
+  }
 
   document.addEventListener('click',function(e){
     var d=document.querySelector('.lg');if(d&&!d.contains(e.target))d.open=false;
@@ -219,3 +237,5 @@ const year = new Date().getFullYear();
   }
 })();
   </script>
+</body>
+</html>
