@@ -64,16 +64,66 @@ const year = new Date().getFullYear();
         : <img src={banner.src} alt={banner.alt || 'Reklama'} />}
   </div>
   <input type="checkbox" id="m" />
-  <aside class="drawer">
-    <div class="menu">
-      <nav>{left.map((i) => <a class="m1" href={i.h}>{i.l}</a>)}</nav>
-      <nav>{right.map((i) => <a class="m2" href={i.h}>{i.l}</a>)}</nav>
+    <aside class="drawer">
+    <div class="dr-head">
+      <span class="dr-title">Sozlamalar</span>
+      <label class="dr-close" for="m" aria-label="Yopish">✕</label>
     </div>
-    <hr />
-    <div class="til">{t(locale, 'lang')}: {locales.map((l) => <a class={l === locale ? 'on' : ''} href={alts[l] ?? localePath(l)} hreflang={hreflang[l]}>{langCode[l]}</a>)}</div>
-    <div class="menu">
-      <nav>{info.map((i) => <a class="m2" href={i.h}>{i.l}</a>)}</nav>
-      <nav>{S.socials.map((s: any) => <a class="m2" href={s.url} target="_blank" rel="noopener"><Icon name={s.type} /> {names[s.type] ?? s.type}</a>)}</nav>
+    <div class="dr-card">
+      <a class="dr-row" href={L('/c/news')}>
+        <span class="dr-ic">🌐</span>
+        <span class="dr-txt">{t(locale, 'news')}</span>
+      </a>
+      <a class="dr-row" href={L('/c/articles')}>
+        <span class="dr-ic">📰</span>
+        <span class="dr-txt">{t(locale, 'articles')}</span>
+      </a>
+      <a class="dr-row" href={L('/rates')}>
+        <span class="dr-ic">💱</span>
+        <span class="dr-txt">{t(locale, 'rates')}</span>
+      </a>
+      <a class="dr-row" href={L('/events')}>
+        <span class="dr-ic">📅</span>
+        <span class="dr-txt">{t(locale, 'events')}</span>
+      </a>
+      <div class="dr-row dr-static">
+        <span class="dr-ic">🌐</span>
+        <span class="dr-txt">{t(locale, 'lang')}</span>
+        <span class="dr-val">{langName[locale]}</span>
+      </div>
+      <div class="dr-row dr-static">
+        <span class="dr-ic">🌙</span>
+        <span class="dr-txt">{t(locale, 'theme')}</span>
+        <button class="dr-btn" id="th2" type="button">◐</button>
+      </div>
+    </div>
+    <div class="dr-card">
+      <a class="dr-row" href="#social">
+        <span class="dr-txt">{t(locale, 'follow')}</span>
+        <span class="dr-arr">›</span>
+      </a>
+      <a class="dr-row" href={L('/advertising')}>
+        <span class="dr-ic">📢</span>
+        <span class="dr-txt">{t(locale, 'advertising')}</span>
+        <span class="dr-arr">›</span>
+      </a>
+      <a class="dr-row" href={L('/about')}>
+        <span class="dr-ic">ℹ️</span>
+        <span class="dr-txt">{t(locale, 'about')}</span>
+        <span class="dr-arr">›</span>
+      </a>
+      <a class="dr-row" href={L('/contact')}>
+        <span class="dr-ic">👥</span>
+        <span class="dr-txt">{t(locale, 'contact')}</span>
+        <span class="dr-arr">›</span>
+      </a>
+    </div>
+    <div class="dr-card" id="social">
+      <div class="dr-social">
+        {S.socials.map((s: any) => (
+          <a href={s.url} target="_blank" rel="noopener" aria-label={names[s.type] ?? s.type}><Icon name={s.type} /></a>
+        ))}
+      </div>
     </div>
     <div class="small">{legal.map((i) => <a href={i.h}>{i.l}</a>)}</div>
   </aside>
