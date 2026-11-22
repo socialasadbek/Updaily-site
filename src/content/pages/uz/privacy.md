@@ -1,26 +1,27 @@
 ---
 title: Maxfiylik siyosati
-description: Updaily saytida foydalanuvchi ma'lumotlari qanday to'planishi va ishlatilishi haqida.
+description: Updaily saytida foydalanuvçi ma'lumotlari qanday töplanişi va işlatilişi haqida.
 ---
+
 Ushbu sahifa Updaily.uz saytidan foydalanganda ma'lumotlaringiz qanday ishlatilishini tushuntiradi.
 
-## Qanday ma'lumotlar to'planadi
+## Qanday ma'lumotlar töplanadi
 
-- **Statistik ma'lumotlar.** Sayt tashriflar soni, ko'rilgan sahifalar, qurilma va brauzer turi kabi umumiy ma'lumotlarni analitika xizmatlari orqali to'plashi mumkin. Bu ma'lumotlar sizni shaxsan aniqlamaydi.
-- **Siz yuborgan ma'lumotlar.** Elektron pochta yoki Telegram orqali yozsangiz, ismingiz va murojaatingiz bizga ko'rinadi. Biz ularni faqat javob berish uchun ishlatamiz.
+- **Statistik ma'lumotlar.** Sayt taşriflar soni, körilgan sahifalar, qurilma va brauzer turi kabi umumiy ma'lumotlarni analitika xizmatlari orqali töplashi mumkin. Bu ma'lumotlar sizni şaxsan aniqlamaydi.
+- **Siz yuborgan ma'lumotlar.** Elektron poçta yoki Telegram orqali yozsangiz, ismingiz va murojaatingiz bizga körinadi. Biz ularni faqat javob berish uchun ishlatamiz.
 
 ## Cookie fayllari
 
-Sayt tungi rejim kabi sozlamalarni eslab qolish va statistika uchun cookie va brauzer xotirasidan foydalanishi mumkin. Brauzer sozlamalarida ularni o'chirib qo'yishingiz mumkin.
+Sayt tungi rejim kabi sozlamalarni eslab qoliş va statistika uchun cookie va brauzer xotirasidan foydalanişi mumkin. Brauzer sozlamalarida ularni öçirib qöyişingiz mumkin.
 
-## Uchinchi tomon havolalari
+## Uçinçi tomon havolalari
 
-Saytda boshqa saytlarga havolalar bor. Ularning maxfiylik qoidalari uchun biz javobgar emasmiz.
+Saytda boşqa saytlarga havolalar bor. Ularning maxfiylik qoidalari uchun biz javobgar emasmiz.
 
-## Ma'lumotlarni uzatish
+## Ma'lumotlarni uzatiş
 
-Shaxsiy ma'lumotlaringizni uchinchi shaxslarga sotmaymiz. Qonunda nazarda tutilgan hollarda vakolatli organlarga taqdim etilishi mumkin.
+Şaxsiy ma'lumotlaringizni uçinçi şaxslarga sotmaymiz. Qonunda nazarda tutilgan hollarda vakolatli organlarga taqdim etilişi mumkin.
 
 ## Aloqa
 
-Savollar uchun: [Updaily.uz@gmail.com](mailto:Updaily.uz@gmail.com). Ushbu siyosat yangilanishi mumkin, so'nggi variant shu sahifada turadi.
+Savollar uchun: [Updaily.uz@gmail.com](mailto:Updaily.uz@gmail.com). Uşbu siyosat yangilanişi mumkin, sönggi variant shu sahifada turadi.
