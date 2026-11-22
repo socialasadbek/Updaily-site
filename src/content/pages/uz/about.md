@@ -9,7 +9,7 @@ description: Updaily - Özbekiston startup va biznes ekotizimi haqida yangilikla
 
 - Özbekiston startuplari, investitsiyalari va texnologiyalari haqida tez va aniq ma'lumot beriş.
 - Founderlar va ekotizim iştirokçilarining hikoyalarini öquvçiga yetkaziş.
-- Original tahlil va tadqiqotlar bilan töğri qaror qabul qilishga yordam beriş.
+- Original tahlil va tadqiqotlar bilan töğri qaror qabul qilişga yordam beriş.
 
 ## Nimalar haqida yozamiz
 
