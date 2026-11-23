@@ -2,7 +2,7 @@
 translationKey: ''
 title: Sun’iy intellekt Qırğıziston iqtisodiyotiga nega kam ta’sir qilişi mumkin?
 date: 2026-11-23T04:59:00Z
-updated: ''
+updated: 2026-11-23T06:29:00Z
 author: asadbek-botirov
 category: news
 cover: /uploads/40319.png
