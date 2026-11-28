@@ -1,6 +1,6 @@
 ---
 translationKey: ''
-title: Pavel Durov iPhone foydalanuvchilarini kiberhujumlar xavfidan ogohlantirdi
+title: Pavel Durov iPhone foydalanuvçilarini kiberhujumlar xavfidan ogohlantirdi
 date: 2026-11-28T05:39:00Z
 updated: 2026-11-28T05:39:00Z
 author: asadbek-botirov
