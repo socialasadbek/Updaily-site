@@ -5,7 +5,8 @@ date: 2026-11-21T04:17:00Z
 updated: 2026-11-21T04:17:00Z
 author: asadbek-botirov
 category: news
-cover: /uploads/39312.png
+cover: /uploads/photo_5213449866640564855_w.jpg
+video: ''
 coverAlt: Employees in Uzbekistan Can Now Receive Their Salaries on a Bank Card of Their Choice
 summary: |-
   Employees in Uzbekistan can now receive their salaries and other payments through a bank card or e-wallet of their choice, regardless of which bank provides services to their employer.
