@@ -71,30 +71,5 @@
       "lang": ""
     }
   ],
-  "ads": [
-    {
-      "slot": "article-middle",
-      "image": "/uploads/a54e8f68-d1c4-43fb-89e4-43f4c4fb48b7.png",
-      "url": "https://updaily.uz/",
-      "start": "2026-11-28T06:27:00Z",
-      "end": "2026-11-29T09:27:00Z",
-      "active": true
-    },
-    {
-      "slot": "article-bottom",
-      "image": "/uploads/Screenshot 2026-11-21 092719.png",
-      "url": "https://updaily.uz/",
-      "start": "2026-11-28T06:28:00Z",
-      "end": "2026-11-29T09:28:00Z",
-      "active": true
-    },
-    {
-      "slot": "home-top",
-      "image": "/uploads/Screenshot 2026-11-21 092719.png",
-      "url": "https://updaily.uz/",
-      "start": "2026-11-28T06:31:00Z",
-      "end": "2026-12-05T09:31:00Z",
-      "active": true
-    }
-  ]
+  "ads": []
 }
